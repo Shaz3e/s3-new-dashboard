@@ -17,6 +17,10 @@ class UserObserver
         ], [
             'avatar' => $this->randomAvatar(), // Assign a random avatar
         ]);
+
+        // First Name and Last Name
+        $user->name = $user->first_name.' '.$user->last_name;
+        $user->save();
     }
 
     /**
