@@ -28,8 +28,8 @@ class PasswordResetRequest extends FormRequest
             ],
             'password_confirmation' => [
                 'required',
-                'same:password'
-            ]
+                'same:password',
+            ],
         ];
     }
 }

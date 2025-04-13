@@ -34,6 +34,31 @@
             </form>
         </div>
         {{-- /.card-body --}}
+
+        @env('local')
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-lg-6">
+                    <x-login-link key="2" label="Login as Developer" class="btn btn-success mb-2" />
+                    <x-login-link key="1" label="Login as Super Admin" class="btn btn-success mb-2" />
+                    <x-login-link key="3" label="Login as Tester" class="btn btn-success mb-2" />
+                    <x-login-link key="4" label="Login as Admin" class="btn btn-success mb-2" />
+                    <x-login-link key="5" label="Login as Manager" class="btn btn-success mb-2" />
+                    <x-login-link key="6" label="Login as Staff" class="btn btn-success mb-2" />
+                </div>
+                {{-- /.col --}}
+                <div class="col-lg-6">
+                    <x-login-link key="7" label="Login as User One" class="btn btn-success mb-2" />
+                    <x-login-link key="8" label="Login as User Two" class="btn btn-success mb-2" />
+                    <x-login-link key="9" label="Login as User Three" class="btn btn-success mb-2" />
+                    <x-login-link key="10" label="Login as User Four" class="btn btn-success mb-2" />
+                </div>
+                {{-- /.col --}}
+            </div>
+            {{-- /.row --}}
+        </div>
+        {{-- /.card-footer --}}
+        @endenv
     </div>
     {{-- /.card --}}
 @endsection
