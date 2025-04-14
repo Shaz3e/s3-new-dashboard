@@ -11,7 +11,9 @@ class PasswordResetController extends Controller
 {
     public function resetForm()
     {
-        return view('auth.reset-password');
+        return view('auth.reset-password', [
+            'title' => 'Password reset'
+        ]);
     }
 
     public function reset(PasswordResetRequest $request)
