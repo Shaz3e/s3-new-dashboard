@@ -10,11 +10,11 @@ require __DIR__.'/auth.php';
 // Admin Routes
 Route::middleware([
     'auth',
-    // 'locked',
+    'locked',
     // 'verification',
     // 'suspended',
 ])
-    // ->prefix('admin')
+    ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         require __DIR__.'/admin.php';
@@ -23,11 +23,11 @@ Route::middleware([
 // Client Routes
 Route::middleware([
     'auth',
-    // 'locked',
+    'locked',
     // 'verification',
     // 'suspended',
 ])
-    ->prefix('my')
+    // ->prefix('my')
     ->name('client.')
     ->group(function () {
         require __DIR__.'/client.php';
