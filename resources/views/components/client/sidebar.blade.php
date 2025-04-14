@@ -2,7 +2,7 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header">
-            <a href="../dashboard/index.html" class="b-brand text-primary">
+            <a href="{{ route('client.dashboard') }}" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
                 <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo" />
                 <span class="badge bg-light-success rounded-pill ms-2 theme-version">v9.5.1</span>
@@ -13,12 +13,11 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                class="user-avtar wid-45 rounded-circle" />
+                            <x-user-avatar class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0" data-i18n="Jonh Smith">Jonh Smith</h6>
-                            <small data-i18n="Administrator">Administrator</small>
+                            <h6 class="mb-0" data-i18n="{{ auth()->user()->name }}">{{ auth()->user()->name }}</h6>
+                            <small data-i18n="My Dashboard">My Dashboard</small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse"
                             href="#pc_sidebar_userlink">
@@ -41,9 +40,10 @@
                                 <i class="ti ti-lock"></i>
                                 <span data-i18n="Lock Screen">Lock Screen</span>
                             </a>
-                            <a href="#!">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="document.getElementById('logout-form').submit();">
                                 <i class="ti ti-power"></i>
-                                <span data-i18n="Logout">Logout</span>
+                                <span>Logout</span>
                             </a>
                         </div>
                     </div>

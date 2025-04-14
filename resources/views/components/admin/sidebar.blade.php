@@ -13,11 +13,10 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                class="user-avtar wid-45 rounded-circle" />
+                            <x-user-avatar class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0" data-i18n="Jonh Smith">Jonh Smith</h6>
+                            <h6 class="mb-0" data-i18n="{{ auth()->user()->name }}">{{ auth()->user()->name }}</h6>
                             <small data-i18n="Administrator">Administrator</small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse"
@@ -41,9 +40,10 @@
                                 <i class="ti ti-lock"></i>
                                 <span data-i18n="Lock Screen">Lock Screen</span>
                             </a>
-                            <a href="#!">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="document.getElementById('logout-form').submit();">
                                 <i class="ti ti-power"></i>
-                                <span data-i18n="Logout">Logout</span>
+                                <span>Logout</span>
                             </a>
                         </div>
                     </div>
