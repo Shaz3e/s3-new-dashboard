@@ -16,7 +16,7 @@ return [
     'allowed_hosts' => [
         'localhost',
         '127.0.0.1',
-        's3-new-dashboard.test'
+        's3-new-dashboard.test',
     ],
 
     /*
