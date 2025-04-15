@@ -12,7 +12,7 @@ class PasswordResetController extends Controller
     public function resetForm()
     {
         return view('auth.reset-password', [
-            'title' => 'Password reset'
+            'title' => 'Password reset',
         ]);
     }
 

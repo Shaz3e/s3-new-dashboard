@@ -55,9 +55,9 @@ class LockedController extends Controller
         // Flash Message
         flash()->success('Welcome Back: '.$user->name);
 
-        if($user->is_admin == 1){
+        if ($user->is_admin == 1) {
             return redirect()->route('admin.dashboard');
-        }else{
+        } else {
             return redirect()->route('client.dashboard');
         }
     }

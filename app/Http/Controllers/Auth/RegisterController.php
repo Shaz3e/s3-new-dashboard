@@ -10,8 +10,8 @@ class RegisterController extends Controller
 {
     public function registerForm()
     {
-        return view('auth.register',[
-            'title' => 'Register'
+        return view('auth.register', [
+            'title' => 'Register',
         ]);
     }
 
