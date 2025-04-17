@@ -23,13 +23,6 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('address')->nullable();
-            $table->string('id_type')->nullable();
-            $table->string('id_number')->nullable();
-            $table->string('id_front')->nullable();
-            $table->string('id_back')->nullable();
-            $table->string('id_address_proof')->nullable();
-            $table->date('issue_date')->nullable();
-            $table->date('expiry_date')->nullable();
             $table->timestamps();
         });
     }

@@ -17,10 +17,10 @@ return Configuration::from([
     ],
 
     // Set global options for all notifications (optional)
-    // 'options' => [
-    //     'timeout' => 5000, // Time in milliseconds before the notification disappears
-    //     'position' => 'top-right', // Where the notification appears on the screen
-    // ],
+    'options' => [
+        'timeout' => 5000, // Time in milliseconds before the notification disappears
+        'position' => 'top-right', // Where the notification appears on the screen
+    ],
 
     // Automatically inject JavaScript and CSS assets into your HTML pages
     'inject_assets' => true,

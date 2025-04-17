@@ -29,6 +29,12 @@ class UserObserver
     public function updated(User $user): void
     {
         //
+
+        // First Name and Last Name
+        if ($user->isDirty('first_name') || $user->isDirty('last_name')) {
+            $user->name = $user->first_name.' '.$user->last_name;
+            $user->save();
+        }
     }
 
     /**

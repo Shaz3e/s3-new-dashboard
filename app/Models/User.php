@@ -57,6 +57,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Set first_name attribute as capitalized.
+     *
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst($value);
+    }
+
+    /**
+     * Set last_name attribute as capitalized.
+     *
+     * @return void
+     */
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = ucfirst($value);
+    }
+
+    /**
      * Get the profile associated with this user.
      *
      * @return HasOne<Profile>

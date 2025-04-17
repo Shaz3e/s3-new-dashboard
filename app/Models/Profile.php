@@ -18,22 +18,50 @@ class Profile extends Model
         'city',
         'zipcode',
         'address',
-        'id_type',
-        'id_number',
-        'id_front',
-        'id_back',
-        'id_address_proof',
-        'issue_date',
-        'expiry_date',
     ];
 
     protected function casts(): array
     {
         return [
             'dob' => 'date',         // Date of birth
-            'issue_date' => 'date',  // Date the document was issued
-            'expiry_date' => 'date', // Date the document expires
         ];
+    }
+
+    /**
+     * Get the available gender types.
+     *
+     * This method returns an array of gender types that can be used
+     * in the application. The available options are:
+     * - Male
+     * - Female
+     * - Other
+     *
+     * @return array The available gender types.
+     */
+    public static function getGenderTypes(): array
+    {
+        return [
+            'Male' => 'Male',
+            'Female' => 'Female',
+            'Other' => 'Other',
+        ];
+    }
+
+    public function getPhoneAttribute($value)
+    {
+        // Return empty if the value is null or empty
+        if (empty($value)) {
+            return '';
+        }
+
+        // Step 1: Remove spaces and all non-numeric characters except +
+        $phone = preg_replace('/[^\d+]/', '', $value);
+
+        // Step 2: Ensure it starts with a single + at the start
+        $phone = preg_replace('/^\++/', '', $phone); // Remove multiple + signs
+        $phone = '+'.$phone;
+
+        return $phone;
     }
 
     /**

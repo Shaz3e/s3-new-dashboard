@@ -99,7 +99,7 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                            <a href="#!" class="dropdown-item">
+                            <a href="{{ route('client.profile') }}" class="dropdown-item">
                                 <i class="ti ti-user"></i>
                                 <span>My Account</span>
                             </a>
