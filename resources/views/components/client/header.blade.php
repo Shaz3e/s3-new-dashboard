@@ -37,13 +37,13 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                            <a href="#!" class="dropdown-item" onclick="layout_change('dark')">
+                            <a href="#!" class="dropdown-item" onclick="setTheme('dark')">
                                 <svg class="pc-icon">
                                     <use xlink:href="#custom-moon"></use>
                                 </svg>
                                 <span>Dark</span>
                             </a>
-                            <a href="#!" class="dropdown-item" onclick="layout_change('light')">
+                            <a href="#!" class="dropdown-item" onclick="setTheme('light')">
                                 <svg class="pc-icon">
                                     <use xlink:href="#custom-sun-1"></use>
                                 </svg>

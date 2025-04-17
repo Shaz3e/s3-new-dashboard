@@ -34,23 +34,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Function to change layout dark/light settings
 function layout_change_default() {
-  // Determine initial layout based on user's color scheme preference
-  let dark_layout = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-  // Apply the determined layout
-  layout_change(dark_layout);
-
-  // Set the active state for the default layout button
-  const btn_control = document.querySelector('.theme-layout .btn[data-value="default"]');
-  if (btn_control) {
-    btn_control.classList.add('active');
-  }
-
-  // Listen for changes in the user's color scheme preference and adjust layout accordingly
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-    dark_layout = event.matches ? 'dark' : 'light';
+    localStorage.removeItem('theme'); // 🧽 remove forced theme
+    let dark_layout = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     layout_change(dark_layout);
-  });
+
+    const btn_control = document.querySelector('.theme-layout .btn[data-value="default"]');
+    if (btn_control) {
+        btn_control.classList.add('active');
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+        dark_layout = event.matches ? 'dark' : 'light';
+        layout_change(dark_layout);
+    });
 }
 
 var layout_btn = document.querySelectorAll('.theme-layout .btn');
@@ -298,4 +294,8 @@ function change_box_container(value) {
   }
 }
 
+function setTheme(theme) {
+    localStorage.setItem('theme', theme);
+    layout_change(theme);
+}
 // ----------    new setup end   ------------
