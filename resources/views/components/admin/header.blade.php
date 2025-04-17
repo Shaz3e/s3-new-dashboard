@@ -49,12 +49,12 @@
                                 </svg>
                                 <span>Light</span>
                             </a>
-                            <a href="#!" class="dropdown-item" onclick="layout_change_default()">
+                            {{-- <a href="#!" class="dropdown-item" onclick="layout_change_default()">
                                 <svg class="pc-icon">
                                     <use xlink:href="#custom-setting-2"></use>
                                 </svg>
                                 <span>Default</span>
-                            </a>
+                            </a> --}}
                         </div>
                     </li>
                     <li class="dropdown pc-h-item">
