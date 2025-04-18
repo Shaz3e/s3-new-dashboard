@@ -36,7 +36,7 @@
                                 <i class="ti ti-settings"></i>
                                 <span data-i18n="Settings">Settings</span>
                             </a>
-                            <a href="#!">
+                            <a href="{{ route('locked') }}">
                                 <i class="ti ti-lock"></i>
                                 <span data-i18n="Lock Screen">Lock Screen</span>
                             </a>

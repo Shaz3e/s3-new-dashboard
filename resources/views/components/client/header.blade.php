@@ -111,7 +111,7 @@
                                 <i class="ti ti-headset"></i>
                                 <span>Support</span>
                             </a>
-                            <a href="#!" class="dropdown-item">
+                            <a href="{{ route('locked') }}" class="dropdown-item">
                                 <i class="ti ti-lock"></i>
                                 <span>Lock Screen</span>
                             </a>
