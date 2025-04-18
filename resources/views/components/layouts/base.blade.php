@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
 
     @stack('styles')
+
+    @livewireStyles
 </head>
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
@@ -54,7 +56,7 @@
     </div>
     <!-- [ Main Content ] end -->
 
-     @yield('footer')
+    @yield('footer')
 
     <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
@@ -105,6 +107,8 @@
             @csrf
         </form>
     @endif
+
+    @livewireScripts
 </body>
 
 </html>
