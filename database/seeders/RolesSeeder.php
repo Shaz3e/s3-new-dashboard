@@ -33,12 +33,12 @@ class RolesSeeder extends Seeder
     protected function assignRolesToUsers(): void
     {
         $users = [
-            'superadmin@forexbackoffice.com' => 'superadmin',
-            'tester@forexbackoffice.com' => 'tester',
-            'developer@forexbackoffice.com' => 'developer',
-            'admin@forexbackoffice.com' => 'admin',
-            'manager@forexbackoffice.com' => 'manager',
-            'staff@forexbackoffice.com' => 'staff',
+            'superadmin@shaz3e.com' => 'superadmin',
+            'tester@shaz3e.com' => 'tester',
+            'developer@shaz3e.com' => 'developer',
+            'admin@shaz3e.com' => 'admin',
+            'manager@shaz3e.com' => 'manager',
+            'staff@shaz3e.com' => 'staff',
         ];
 
         foreach ($users as $email => $roleName) {
