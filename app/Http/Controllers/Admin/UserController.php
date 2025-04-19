@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\Admin\StoreUserRequest;
 use App\Models\User;
+use App\Rules\FirstNameRule;
+use App\Rules\LastNameRule;
 use App\Rules\PasswordRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -148,7 +149,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
         // Authorize the action to update a user
         // This gate is used to protect against unauthorized access to the user update form
@@ -216,11 +217,11 @@ class UserController extends Controller
         $validated = $request->validate([
             // The first name of the user is required and must be a string
             // The first name must not be longer than 100 characters
-            'first_name' => 'required|string|max:100',
+            'first_name' => new FirstNameRule,
 
             // The last name of the user is required and must be a string
             // The last name must not be longer than 100 characters
-            'last_name' => 'required|string|max:100',
+            'last_name' => new LastNameRule,
 
             // The email address of the user is required and must be a valid email address
             // The email address must not be longer than 100 characters
