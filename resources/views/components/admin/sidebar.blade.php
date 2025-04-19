@@ -74,6 +74,39 @@
                                 data-i18n="Finance">Finance</a></li>
                     </ul>
                 </li>
+
+                @can('users.list')
+                    <li class="pc-item pc-caption">
+                        <label data-i18n="Manage users & Roles">Manage Users & Roles</label>
+                    </li>
+                    <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link">
+                            <span class="pc-micon">
+                                <svg class="pc-icon">
+                                    <use xlink:href="#custom-user-square"></use>
+                                </svg>
+                            </span>
+                            <span class="pc-mtext" data-i18n="Manage Users">Manage Users</span>
+                            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="pc-submenu">
+                            @can('users.list')
+                                <li class="pc-item">
+                                    <a class="pc-link" href="{{ route('admin.users.index') }}" data-i18n="User List">
+                                        User List
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('users.create')
+                                <li class="pc-item">
+                                    <a class="pc-link" href="{{ route('admin.users.create') }}" data-i18n="Create New User">
+                                        Create New User
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

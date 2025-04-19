@@ -108,6 +108,10 @@
         </form>
     @endif
 
+
+    <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
+    @include('components.sweetalert')
+
     @livewireScripts
 </body>
 

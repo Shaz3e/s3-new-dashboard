@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,10 +26,18 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'password',
+        'username',         // User's unique username
+        'first_name',       // User's first name
+        'last_name',        // User's last name
+        'name',             // Full name of the user
+        'email',            // User's email address
+        'password',         // User's hashed password
+        'email_verified_at', // Timestamp of email verification
+        'is_locked',        // Whether the user's account is locked
+        'is_active',        // Whether the user's account is active
+        'is_suspended',     // Whether the user's account is suspended
+        'is_admin',         // Whether the user has admin privileges
+        'verification_code', // Code for email verification
     ];
 
     protected $dates = ['deleted_at'];
@@ -54,6 +63,34 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Sort the user entries by their id.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSortedBy(Builder $query)
+    {
+        // Sort the user entries by their id. The Failed id is given priority
+        return $query
+            ->orderBy('created_at', 'asc');
+    }
+
+    /**
+     * Determine if the user is an admin.
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin == 1;
+    }
+
+    /**
+     * Determine if the user is a client.
+     */
+    public function isClient()
+    {
+        return $this->is_admin == 0;
     }
 
     /**
