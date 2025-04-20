@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use App\Rules\FirstNameRule;
 use App\Rules\LastNameRule;
@@ -12,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -24,7 +24,9 @@ class UserController extends Controller
         // Authorize the action to view any user
         Gate::authorize('viewAny', [User::class, 'user']);
 
-        return view('admin.users.index');
+        return view('admin.users.index',[
+            'title' => 'Staff List',
+        ]);
     }
 
     /**
@@ -41,7 +43,7 @@ class UserController extends Controller
             ->all();
 
         return view('admin.users.create', [
-            'title' => 'Create New User',
+            'title' => 'Create New Staff',
             'roles' => $roles,
         ]);
     }
@@ -100,7 +102,7 @@ class UserController extends Controller
         Gate::authorize('view', [$user, 'user']);
 
         return view('admin.users.show', [
-            'title' => 'View User',
+            'title' => 'View Staff',
             'user' => $user,
         ]);
     }
@@ -136,7 +138,7 @@ class UserController extends Controller
         // This view is only accessible by an authorized user with the 'update' permission
         return view('admin.users.edit', [
             // The title of the page
-            'title' => __('Edit User'),
+            'title' => 'Edit Staff',
             // The user instance
             'user' => $user,
             // All the active roles in the system

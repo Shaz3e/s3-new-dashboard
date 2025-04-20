@@ -1,7 +1,7 @@
 @extends('components.layouts.app')
 
 @section('content')
-    <x-page-title title="{{ __('Manage Users') }}" :breadcrumbs="[['url' => route('admin.dashboard'), 'label' => __('Dashboard')], ['label' => __('Users')]]" />
+    <x-page-title title="{{ __('Manage Staff') }}" :breadcrumbs="[['url' => route('admin.dashboard'), 'label' => __('Dashboard')], ['label' => __('Staff List')]]" />
 
     @livewire('admin.users.users-list')
 @endsection

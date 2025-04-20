@@ -10,6 +10,15 @@ return [
         'restore',
         'force.delete',
     ],
+    'roles' => [
+        'list',
+        'create',
+        'read',
+        'update',
+        'delete',
+        'restore',
+        'force.delete',
+    ],
     'clients' => [
         'list',
         'create',
