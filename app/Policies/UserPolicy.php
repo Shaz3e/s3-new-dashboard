@@ -19,7 +19,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.list');
+            return $authUser->can('clients.list');
         }
 
         return false; // Default deny
@@ -38,7 +38,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.read');
+            return $authUser->can('clients.read');
         }
 
         return false; // Default deny
@@ -57,7 +57,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.create');
+            return $authUser->can('clients.create');
         }
 
         return false; // Default deny
@@ -76,7 +76,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.update');
+            return $authUser->can('clients.update');
         }
 
         return false; // Default deny
@@ -95,7 +95,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.delete');
+            return $authUser->can('clients.delete');
         }
 
         return false; // Default deny
@@ -114,7 +114,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.restore');
+            return $authUser->can('clients.restore');
         }
 
         return false; // Default deny
@@ -133,7 +133,7 @@ class UserPolicy
 
         // If the target is CLIENTS
         if ($targetType === 'client') {
-            return $authUser->can('client.force.delete');
+            return $authUser->can('clients.force.delete');
         }
 
         return false; // Default deny

@@ -51,6 +51,18 @@
             </div>
 
             <ul class="pc-navbar">
+                @if (session()->has('impersonate'))
+                    <li class="pc-item">
+                        <a href="{{ route('admin.stop.impersonation') }}" class="pc-link">
+                            <span class="pc-micon">
+                                <svg class="pc-icon">
+                                    <use xlink:href="#custom-status-up"></use>
+                                </svg>
+                            </span>
+                            <span class="pc-mtext" data-i18n="Login Back As Staff">Login Back As Staff</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="pc-item pc-caption">
                     <label data-i18n="Navigation">Navigation</label>
                 </li>
