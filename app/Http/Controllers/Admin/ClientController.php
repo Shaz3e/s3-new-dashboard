@@ -308,6 +308,6 @@ class ClientController extends Controller
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('success', 'You have returned to your backoffice account.');
+            ->with('success', 'You have returned to your staff account.');
     }
 }

@@ -38,8 +38,36 @@
                             </a>
                             <a href="{{ route('locked') }}">
                                 <i class="ti ti-lock"></i>
-                                <span data-i18n="Lock Screen">Lock Screen</span>
+                                <span data-i18n="Lock Screen">Lock My Account</span>
                             </a>
+                            @hasanyrole('superadmin|developer|tester')
+                                <a href="/pulse" target="_blank">
+                                    <svg class="pc-icon text-muted me-2">
+                                        <use xlink:href="#custom-presentation-chart"></use>
+                                    </svg>
+                                    <span data-i18n="App Pulse">App Pulse</span>
+                                </a>
+                                <a href="/log-viewer" target="_blank">
+                                    <svg class="pc-icon text-muted me-2">
+                                        <use xlink:href="#custom-layer"></use>
+                                    </svg>
+                                    <span data-i18n="Dev Logs">Dev Logs</span>
+                                </a>
+                                <a href="/log-viewer">
+                                    <svg class="pc-icon text-muted me-2">
+                                        <use xlink:href="#custom-direct-inbox"></use>
+                                    </svg>
+                                    <span data-i18n="App Backup">App Backup</span>
+                                </a>
+                                @if (app()->environment('local'))
+                                    <a href="/telescope" target="_blank">
+                                        <svg class="pc-icon text-muted me-2">
+                                            <use xlink:href="#custom-text-block"></use>
+                                        </svg>
+                                        <span data-i18n="App TeleScope">App TeleScope</span>
+                                    </a>
+                                @endif
+                            @endhasanyrole
                             <a href="javascript:void(0)" class="dropdown-item"
                                 onclick="document.getElementById('logout-form').submit();">
                                 <i class="ti ti-power"></i>

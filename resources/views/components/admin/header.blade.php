@@ -281,85 +281,59 @@
                                         </div>
                                     </div>
                                     <p class="text-span">Manage</p>
-                                    <a href="#" class="dropdown-item">
+                                    <a href="{{ route('admin.profile') }}" class="dropdown-item">
                                         <span>
                                             <svg class="pc-icon text-muted me-2">
-                                                <use xlink:href="#custom-setting-outline"></use>
+                                                <use xlink:href="#custom-user"></use>
                                             </svg>
-                                            <span>Settings</span>
+                                            <span>My Account</span>
                                         </span>
                                     </a>
-                                    <a href="#" class="dropdown-item">
+                                    <a href="{{ route('locked') }}" class="dropdown-item">
                                         <span>
-                                            <svg class="pc-icon text-muted me-2">
-                                                <use xlink:href="#custom-share-bold"></use>
-                                            </svg>
-                                            <span>Share</span>
-                                        </span>
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <span>
-                                            <svg class="pc-icon text-muted me-2">
-                                                <use xlink:href="#custom-lock-outline"></use>
-                                            </svg>
-                                            <span>Change Password</span>
+                                            <i class="ti ti-lock"></i>
+                                            <span>Lock My Account</span>
                                         </span>
                                     </a>
                                     <hr class="border-secondary border-opacity-50" />
-                                    <p class="text-span">Team</p>
-                                    <a href="#" class="dropdown-item">
-                                        <span>
-                                            <svg class="pc-icon text-muted me-2">
-                                                <use xlink:href="#custom-profile-2user-outline"></use>
-                                            </svg>
-                                            <span>UI Design team</span>
-                                        </span>
-                                        <div class="user-group">
-                                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                                class="avtar" />
-                                            <span class="avtar bg-danger text-white">K</span>
-                                            <span class="avtar bg-success text-white">
-                                                <svg class="pc-icon m-0">
-                                                    <use xlink:href="#custom-user"></use>
+                                    @hasanyrole('superadmin|developer|tester')
+                                        <p class="text-span">My Tools</p>
+                                        <a href="/pulse" class="dropdown-item" target="_blank">
+                                            <span>
+                                                <svg class="pc-icon text-muted me-2">
+                                                    <use xlink:href="#custom-presentation-chart"></use>
                                                 </svg>
+                                                <span>App Pulse</span>
                                             </span>
-                                            <span class="avtar bg-light-primary text-primary">+2</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <span>
-                                            <svg class="pc-icon text-muted me-2">
-                                                <use xlink:href="#custom-profile-2user-outline"></use>
-                                            </svg>
-                                            <span>Friends Groups</span>
-                                        </span>
-                                        <div class="user-group">
-                                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image"
-                                                class="avtar" />
-                                            <span class="avtar bg-danger text-white">K</span>
-                                            <span class="avtar bg-success text-white">
-                                                <svg class="pc-icon m-0">
-                                                    <use xlink:href="#custom-user"></use>
+                                        </a>
+                                        <a href="/log-viewer" class="dropdown-item" target="_blank">
+                                            <span>
+                                                <svg class="pc-icon text-muted me-2">
+                                                    <use xlink:href="#custom-layer"></use>
                                                 </svg>
+                                                <span>Dev Logs</span>
                                             </span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <span>
-                                            <svg class="pc-icon text-muted me-2">
-                                                <use xlink:href="#custom-add-outline"></use>
-                                            </svg>
-                                            <span>Add new</span>
-                                        </span>
-                                        <div class="user-group">
-                                            <span class="avtar bg-primary text-white">
-                                                <svg class="pc-icon m-0">
-                                                    <use xlink:href="#custom-add-outline"></use>
+                                        </a>
+                                        <a href="/log-viewer" class="dropdown-item" target="_blank">
+                                            <span>
+                                                <svg class="pc-icon text-muted me-2">
+                                                    <use xlink:href="#custom-direct-inbox"></use>
                                                 </svg>
+                                                <span>App Backup</span>
                                             </span>
-                                        </div>
-                                    </a>
-                                    <hr class="border-secondary border-opacity-50" />
+                                        </a>
+                                        @if (app()->environment('local'))
+                                            <a href="/telescope" class="dropdown-item" target="_blank">
+                                                <span>
+                                                    <svg class="pc-icon text-muted me-2">
+                                                        <use xlink:href="#custom-text-block"></use>
+                                                    </svg>
+                                                    <span>App TeleScope</span>
+                                                </span>
+                                            </a>
+                                        @endif
+                                        <hr class="border-secondary border-opacity-50" />
+                                    @endhasanyrole
                                     <form action="{{ route('admin.logout') }}" method="POST">
                                         @csrf
                                         @method('POST')
