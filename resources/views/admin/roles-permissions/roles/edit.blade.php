@@ -47,7 +47,7 @@
                 <div class="card table-card">
                     <div class="card-body">
                         <div class="table-responsive mb-0">
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-hover table-bordered" id="permissionsTable">
                                 <thead>
                                     <tr>
                                         <th>{{ __('Permissions') }}</th>
@@ -65,33 +65,27 @@
                                     @foreach ($permissions->groupBy(function ($permission) {
             return explode('.', $permission->name)[0];
         }) as $modelName => $modelPermissions)
-                                        <tr>
-                                            <td>
-                                                {{ str_replace('-', ' ', strtoupper($modelName)) }}
+                                        @php $rowId = strtolower($modelName); @endphp
+                                        <tr data-row="{{ $rowId }}">
+                                            <td>{{ str_replace('-', ' ', strtoupper($modelName)) }}</td>
+                                            <td class="text-center">
+                                                <input type="checkbox" class="check-all" data-row="{{ $rowId }}">
                                             </td>
-                                            <td class="text-center"><input type="checkbox"></td>
                                             @foreach (['list', 'create', 'read', 'update', 'delete', 'restore', 'force.delete'] as $action)
+                                                @php
+                                                    $permission = $modelPermissions->first(function ($p) use ($action) {
+                                                        return str_contains($p->name, $action);
+                                                    });
+                                                @endphp
                                                 <td class="text-center">
-                                                    @if (
-                                                        $modelPermissions->contains(function ($permission) use ($action) {
-                                                            return str_contains($permission->name, $action);
-                                                        }))
+                                                    @if ($permission)
                                                         <input type="checkbox" name="permissions[]"
-                                                            class="form-checkbox-input"
-                                                            id="checkPermission-{{ $modelPermissions->first(function ($permission) use ($action) {
-                                                                return str_contains($permission->name, $action);
-                                                            })->id }}"
-                                                            value="{{ $modelPermissions->first(function ($permission) use ($action) {
-                                                                return str_contains($permission->name, $action);
-                                                            })->name }}"
-                                                            {{ in_array(
-                                                                $modelPermissions->first(function ($permission) use ($action) {
-                                                                    return str_contains($permission->name, $action);
-                                                                })->id,
-                                                                $rolePermissions,
-                                                            )
-                                                                ? 'checked'
-                                                                : '' }} />
+                                                            class="form-checkbox-input action-checkbox"
+                                                            data-action="{{ $action }}"
+                                                            data-row="{{ $rowId }}"
+                                                            id="checkPermission-{{ $permission->id }}"
+                                                            value="{{ $permission->name }}"
+                                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
                                                     @endif
                                                 </td>
                                             @endforeach
@@ -120,34 +114,34 @@
 @endpush
 @push('scripts')
     <script>
-        // Select all checkboxes in a row when "All" is clicked
-        $('tbody tr td:nth-child(2) input[type="checkbox"]').on('click', function() {
-            var row = $(this).closest('tr');
-            row.find('td input[type="checkbox"]').prop('checked', $(this).is(':checked'));
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const table = document.getElementById('permissionsTable');
 
-        // Check "Delete" and "Restore" when "Force Delete" is clicked
-        $('tbody tr td:nth-child(9) input[type="checkbox"]').on('click', function() {
-            var row = $(this).closest('tr');
-            if ($(this).is(':checked')) {
-                // If "Force Delete" is checked, check "Delete" and "Restore"
-                row.find('td:nth-child(7) input[type="checkbox"]').prop('checked', true);
-                row.find('td:nth-child(8) input[type="checkbox"]').prop('checked', true);
-            } else {
-                // If "Force Delete" is unchecked, also uncheck "Delete" and "Restore"
-                row.find('td:nth-child(7) input[type="checkbox"]').prop('checked', false);
-                row.find('td:nth-child(8) input[type="checkbox"]').prop('checked', false);
-            }
-        });
+            // Toggle all checkboxes in a row
+            table.querySelectorAll(".check-all").forEach(allCheckbox => {
+                allCheckbox.addEventListener("change", function() {
+                    const row = this.dataset.row;
+                    table.querySelectorAll(`input.action-checkbox[data-row="${row}"]`).forEach(
+                        cb => {
+                            cb.checked = this.checked;
+                        });
+                });
+            });
 
-        // Uncheck "Restore" and "Force Delete" when "Delete" is unchecked
-        $('tbody tr td:nth-child(7) input[type="checkbox"]').on('click', function() {
-            var row = $(this).closest('tr');
-            if (!$(this).is(':checked')) {
-                // If "Delete" is unchecked, uncheck "Restore" and "Force Delete"
-                row.find('td:nth-child(8) input[type="checkbox"]').prop('checked', false);
-                row.find('td:nth-child(9) input[type="checkbox"]').prop('checked', false);
-            }
+            // Handle dependency of restore/force.delete on delete
+            table.querySelectorAll(`input.action-checkbox[data-action="delete"]`).forEach(deleteCheckbox => {
+                deleteCheckbox.addEventListener("change", function() {
+                    const row = this.dataset.row;
+                    if (!this.checked) {
+                        table.querySelectorAll([
+                            `input.action-checkbox[data-row="${row}"][data-action="restore"]`,
+                            `input.action-checkbox[data-row="${row}"][data-action="force.delete"]`
+                        ].join(',')).forEach(cb => {
+                            cb.checked = false;
+                        });
+                    }
+                });
+            });
         });
     </script>
 @endpush
