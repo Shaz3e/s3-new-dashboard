@@ -77,35 +77,35 @@
 
                 @can('users.list')
                     <li class="pc-item pc-caption">
-                        <label data-i18n="Manage users & Roles">Manage Staff & Roles</label>
+                        <label data-i18n="Manage users & Roles">Manage User & Roles</label>
                     </li>
-                    <li class="pc-item pc-hasmenu">
+                    <li class="pc-item pc-hasmenu {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                         <a href="#!" class="pc-link">
                             <span class="pc-micon">
                                 <svg class="pc-icon">
                                     <use xlink:href="#custom-user-square"></use>
                                 </svg>
                             </span>
-                            <span class="pc-mtext" data-i18n="Manage Staff">Manage Staff</span>
+                            <span class="pc-mtext" data-i18n="Manage User">Manage User</span>
                             <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                         </a>
-                        <ul class="pc-submenu">
+                        <ul class="pc-submenu" {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'style=display:block' : '' }}>
                             @can('users.list')
-                                <li class="pc-item">
-                                    <a class="pc-link" href="{{ route('admin.users.index') }}" data-i18n="Staff List">
-                                        Staff List
+                                <li class="pc-item {{ Route::currentRouteName() == 'admin.users.index' ? 'active' : '' }}">
+                                    <a class="pc-link" href="{{ route('admin.users.index') }}" data-i18n="User List">
+                                        User List
                                     </a>
                                 </li>
                             @endcan
                             @can('users.create')
-                                <li class="pc-item">
-                                    <a class="pc-link" href="{{ route('admin.users.create') }}" data-i18n="Create New Staff">
-                                        Create New Staff
+                                <li class="pc-item {{ Route::currentRouteName() == 'admin.users.create' ? 'active' : '' }}">
+                                    <a class="pc-link" href="{{ route('admin.users.create') }}" data-i18n="Create New User">
+                                        Create New User
                                     </a>
                                 </li>
                             @endcan
                             @can('roles.create')
-                                <li class="pc-item">
+                                <li class="pc-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                                     <a class="pc-link" href="{{ route('admin.roles.index') }}" data-i18n="Manage Roles">
                                         Roles
                                     </a>

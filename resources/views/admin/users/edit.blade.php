@@ -1,10 +1,10 @@
 @extends('components.layouts.app')
 
 @section('content')
-    <x-page-title title="{{ __('Edit Staff') }}" :breadcrumbs="[
+    <x-page-title title="{{ __('Edit User') }}" :breadcrumbs="[
         ['url' => '/', 'label' => __('Dashboard')],
-        ['url' => route('admin.users.index'), 'label' => __('Manage Staff')],
-        ['label' => __('Edit Staff')],
+        ['url' => route('admin.users.index'), 'label' => __('Manage User')],
+        ['label' => __('Edit User')],
     ]" />
 
     <div class="row">
