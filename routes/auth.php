@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\CodeVerificationController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LockedController;
 use App\Http\Controllers\Auth\LoginController;
@@ -20,6 +21,14 @@ Route::middleware('guest')->group(function () {
     Route::get('/reset/{email}/{token}', [PasswordResetController::class, 'resetForm']);
     Route::post('/reset', [PasswordResetController::class, 'reset'])->name('password.reset');
 });
+
+// Verification
+Route::get('/verification', [CodeVerificationController::class, 'verification']);
+Route::post('/verification', [CodeVerificationController::class, 'store'])->name('verification');
+Route::get('/verification/{email}/{code}', [CodeVerificationController::class, 'verificationCode'])->name('verification.code');
+// Send Verification Code
+Route::post('/resend-verification', [CodeVerificationController::class, 'resendVerificationCode'])->name('resend.verification');
+
 
 Route::middleware('auth')->group(function () {
 
