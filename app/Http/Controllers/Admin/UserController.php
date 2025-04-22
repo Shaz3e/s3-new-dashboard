@@ -24,7 +24,7 @@ class UserController extends Controller
         // Authorize the action to view any user
         Gate::authorize('viewAny', [User::class, 'user']);
 
-        return view('admin.users.index',[
+        return view('admin.users.index', [
             'title' => 'Staff List',
         ]);
     }

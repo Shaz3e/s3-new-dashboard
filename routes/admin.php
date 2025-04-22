@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountProfileController;
+use App\Http\Controllers\Admin\AppBackupController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/logout', LogoutController::class)->name('logout');
 
-Route::get('/', DashboardController::class)->name('dashboard');
+Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
 Route::get('/profile', [AccountProfileController::class, 'profile'])->name('profile');
 Route::post('/profile', [AccountProfileController::class, 'update'])->name('profile.update');
@@ -23,4 +24,11 @@ Route::prefix('/manage')->group(function () {
     Route::resource('/users', UserController::class);
 
     Route::resource('/roles', RoleController::class);
+});
+
+Route::prefix('app-backup')->group(function () {
+    Route::get('/', [AppBackupController::class, 'index'])->name('app-backup.index');
+    Route::post('/', [AppBackupController::class, 'store'])->name('app-backup.store');
+    Route::get('/download/{fileName}', [AppBackupController::class, 'download'])->name('app-backup.download');
+    Route::delete('/delete/{fileName}', [AppBackupController::class, 'delete'])->name('app-backup.delete');
 });

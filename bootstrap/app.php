@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ImpersonateMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,13 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->append([
-        //     ImpersonateMiddleware::class,
-        // ]);
+        $middleware->append([
+            ImpersonateMiddleware::class,
+        ]);
         $middleware->alias([
             'locked' => \App\Http\Middleware\LockedMiddleware::class,
-            // 'verification' => \App\Http\Middleware\EmailCodeVerification::class,
-            // 'suspended' => \App\Http\Middleware\UserSuspendedMiddleware::class,
+            'verification' => \App\Http\Middleware\EmailCodeVerification::class,
+            'suspended' => \App\Http\Middleware\UserSuspendedMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

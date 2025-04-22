@@ -53,7 +53,7 @@
                                     </svg>
                                     <span data-i18n="Dev Logs">Dev Logs</span>
                                 </a>
-                                <a href="/log-viewer">
+                                <a href="{{ route('admin.app-backup.index') }}">
                                     <svg class="pc-icon text-muted me-2">
                                         <use xlink:href="#custom-direct-inbox"></use>
                                     </svg>

@@ -7,7 +7,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_NAME', 'laravel-backup'),
+        'name' => env('APP_NAME'),
 
         'source' => [
             'files' => [
@@ -211,11 +211,11 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => env('APP_BACKUP_NOTIFICATION_EMAIL'),
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
+                'address' => env('MAIL_FROM_ADDRESS'),
+                'name' => env('MAIL_FROM_NAME'),
             ],
         ],
 

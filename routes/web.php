@@ -11,8 +11,8 @@ require __DIR__.'/auth.php';
 Route::middleware([
     'auth',
     'locked',
-    // 'verification',
-    // 'suspended',
+    'verification',
+    'suspended',
 ])
     ->prefix('admin')
     ->name('admin.')
@@ -24,8 +24,8 @@ Route::middleware([
 Route::middleware([
     'auth',
     'locked',
-    // 'verification',
-    // 'suspended',
+    'verification',
+    'suspended',
 ])
     // ->prefix('my')
     ->name('client.')

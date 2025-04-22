@@ -314,7 +314,7 @@
                                                 <span>Dev Logs</span>
                                             </span>
                                         </a>
-                                        <a href="/log-viewer" class="dropdown-item" target="_blank">
+                                        <a href="{{ route('admin.app-backup.index') }}" class="dropdown-item">
                                             <span>
                                                 <svg class="pc-icon text-muted me-2">
                                                     <use xlink:href="#custom-direct-inbox"></use>

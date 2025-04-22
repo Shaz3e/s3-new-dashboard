@@ -4,7 +4,6 @@ namespace App\Livewire\Admin\RolesPermissions\Roles;
 
 use App\Livewire\BaseComponent;
 use App\Models\Role;
-use Livewire\Component;
 
 class RolesList extends BaseComponent
 {
