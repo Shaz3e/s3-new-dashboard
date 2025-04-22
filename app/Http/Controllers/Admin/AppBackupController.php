@@ -20,30 +20,8 @@ class AppBackupController extends Controller
             abort(403);
         }
 
-        // Get the app name from config
-        $appName = config('app.name');
-
-        // Define the directory path
-        $path = storage_path("app/private/{$appName}");
-
-        // Check if directory exists
-        if (! File::exists($path)) {
-            File::makeDirectory($path, 0755, true);
-        }
-
-        // Get all zip files and their metadata
-        $files = collect(File::files($path))
-            ->filter(function ($file) {
-                return $file->getExtension() === 'zip';
-            })
-            ->sortByDesc(function ($file) {
-                return $file->getCTime();
-            })
-            ->values();
-
         return view('admin.app-backup.index', [
             'title' => 'App Backup',
-            'files' => $files,
         ]);
     }
 
