@@ -32,7 +32,7 @@
     </div>
     {{-- /.row --}}
 
-    @livewire('admin.app-backups-.app-backups-list')
+    @livewire('admin.app-backups.app-backups-list')
 @endsection
 
 @push('styles')
