@@ -113,7 +113,7 @@
                             </a>
                             <a href="{{ route('locked') }}" class="dropdown-item">
                                 <i class="ti ti-lock"></i>
-                                <span>Lock Screen</span>
+                                <span>Lock My Account</span>
                             </a>
                             <a href="javascript:void(0)" class="dropdown-item"
                                 onclick="document.getElementById('logout-form').submit();">

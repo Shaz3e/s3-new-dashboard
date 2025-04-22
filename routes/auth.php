@@ -27,8 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/locked', [LockedController::class, 'view']);
     Route::post('/locked', [LockedController::class, 'post'])->name('locked');
 
-    // // Suspended
-    // Route::get('/suspended', function () {
-    //     return view('auth.suspended');
-    // })->name('suspended');
+    // Suspended
+    Route::get('/suspended', function () {
+        return view('auth.suspended');
+    })->name('suspended');
 });

@@ -38,7 +38,7 @@
                             </a>
                             <a href="{{ route('locked') }}">
                                 <i class="ti ti-lock"></i>
-                                <span data-i18n="Lock Screen">Lock My Account</span>
+                                <span data-i18n="Lock My Account">Lock My Account</span>
                             </a>
                             @hasanyrole('superadmin|developer|tester')
                                 <a href="/pulse" target="_blank">
