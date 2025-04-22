@@ -29,7 +29,6 @@ Route::get('/verification/{email}/{code}', [CodeVerificationController::class, '
 // Send Verification Code
 Route::post('/resend-verification', [CodeVerificationController::class, 'resendVerificationCode'])->name('resend.verification');
 
-
 Route::middleware('auth')->group(function () {
 
     // Locked

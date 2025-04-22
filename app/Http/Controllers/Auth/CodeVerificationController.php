@@ -89,7 +89,7 @@ class CodeVerificationController extends Controller
 
         $verification_link = route('verification');
 
-        $emailService = new EmailService(); // Create instance of EmailService
+        $emailService = new EmailService; // Create instance of EmailService
 
         $emailService->sendEmailByKey('verify_account', $user->email, [
             'name' => $user->name,
@@ -122,7 +122,7 @@ class CodeVerificationController extends Controller
 
         $login_url = route('login');
 
-        $emailService = new EmailService(); // Create instance of EmailService
+        $emailService = new EmailService; // Create instance of EmailService
 
         $emailService->sendEmailByKey('welcome_email', $user->email, [
             'app_name' => config('app.name'),
