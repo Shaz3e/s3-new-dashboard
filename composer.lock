@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a22eccf8082f87722e598d2d2a083cb2",
+    "content-hash": "5f9c28b78349e7647c5ad8e806da688f",
     "packages": [
         {
             "name": "brick/math",
@@ -4225,6 +4225,50 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "shaz3e/email-builder",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Shaz3e/email-builder.git",
+                "reference": "5b41b855839dba1acdd35a4b778619673a5836da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Shaz3e/email-builder/zipball/5b41b855839dba1acdd35a4b778619673a5836da",
+                "reference": "5b41b855839dba1acdd35a4b778619673a5836da",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Shaz3e\\EmailBuilder\\Providers\\EmailBuilderServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shaz3e\\EmailBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shahrukh Akhtar",
+                    "email": "iam@shaz3e.com"
+                }
+            ],
+            "description": "Create Email from frontend and use palceholder within email",
+            "support": {
+                "issues": "https://github.com/Shaz3e/email-builder/issues",
+                "source": "https://github.com/Shaz3e/email-builder/tree/v0.1"
+            },
+            "time": "2025-04-24T22:20:09+00:00"
         },
         {
             "name": "spatie/db-dumper",

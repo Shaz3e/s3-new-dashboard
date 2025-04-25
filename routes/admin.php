@@ -4,6 +4,8 @@ use App\Http\Controllers\AccountProfileController;
 use App\Http\Controllers\Admin\AppBackupController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmailTemplateController;
+use App\Http\Controllers\Admin\GlobalEmailTemplateController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -21,9 +23,16 @@ Route::get('/client/{client}/loginAs', [ClientController::class, 'loginAsClient'
 Route::get('/stop-impersonation', [ClientController::class, 'stopImpersonating'])->name('stop.impersonation');
 
 Route::prefix('/manage')->group(function () {
+    // Users
     Route::resource('/users', UserController::class);
-
+    // Roles
     Route::resource('/roles', RoleController::class);
+
+    // Email Templates
+    Route::resource('/email-templates', EmailTemplateController::class);
+
+    // Global Email Templates
+    Route::resource('/global-email-templates', GlobalEmailTemplateController::class);
 });
 
 Route::prefix('app-backup')->group(function () {

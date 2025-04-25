@@ -118,7 +118,7 @@
 
                 @can('users.list')
                     <li class="pc-item pc-caption">
-                        <label data-i18n="Manage users & Roles">Manage User & Roles</label>
+                        <label data-i18n="Manage Users & Roles">Manage User & Roles</label>
                     </li>
                     <li
                         class="pc-item pc-hasmenu {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? 'active' : '' }}">
@@ -151,6 +151,54 @@
                                 <li class="pc-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                                     <a class="pc-link" href="{{ route('admin.roles.index') }}" data-i18n="Manage Roles">
                                         Roles
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+                @can('email-templates.list')
+                    <li class="pc-item pc-caption">
+                        <label data-i18n="Manage Emails & Settings">Manage Emails & Settings</label>
+                    </li>
+                    <li
+                        class="pc-item pc-hasmenu {{ request()->routeIs('admin.email-templates.*') || request()->routeIs('admin.global-email-templates.*') ? 'active' : '' }}">
+                        <a href="#!" class="pc-link">
+                            <span class="pc-micon">
+                                <svg class="pc-icon">
+                                    <use xlink:href="#custom-user-square"></use>
+                                </svg>
+                            </span>
+                            <span class="pc-mtext" data-i18n="Email Templates">Email Templates</span>
+                            <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                        </a>
+                        <ul class="pc-submenu"
+                            {{ request()->routeIs('admin.email-templates.*') || request()->routeIs('admin.global-email-templates.*') ? 'style=display:block' : '' }}>
+                            @can('email-templates.list')
+                                <li
+                                    class="pc-item {{ Route::currentRouteName() == 'admin.email-templates.index' ? 'active' : '' }}">
+                                    <a class="pc-link" href="{{ route('admin.email-templates.index') }}"
+                                        data-i18n="Email Templates">
+                                        Email Templates
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('email-templates.create')
+                                <li
+                                    class="pc-item {{ Route::currentRouteName() == 'admin.email-templates.create' ? 'active' : '' }}">
+                                    <a class="pc-link" href="{{ route('admin.email-templates.create') }}"
+                                        data-i18n="Create New Email">
+                                        Create New Email
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('global-email-templates.list')
+                                <li
+                                    class="pc-item {{ request()->routeIs('admin.global-email-templates.*') ? 'active' : '' }}">
+                                    <a class="pc-link" href="{{ route('admin.global-email-templates.index') }}"
+                                        data-i18n="Global Header & Footer">
+                                        Global Header & Footer
                                     </a>
                                 </li>
                             @endcan
