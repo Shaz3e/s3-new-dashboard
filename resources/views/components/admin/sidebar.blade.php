@@ -160,17 +160,17 @@
 
                 @can('email-templates.list')
                     <li class="pc-item pc-caption">
-                        <label data-i18n="Manage Emails & Settings">Manage Emails & Settings</label>
+                        <label data-i18n="Email Templates & Settings">Email Templates & Settings</label>
                     </li>
                     <li
                         class="pc-item pc-hasmenu {{ request()->routeIs('admin.email-templates.*') || request()->routeIs('admin.global-email-templates.*') ? 'active' : '' }}">
                         <a href="#!" class="pc-link">
                             <span class="pc-micon">
                                 <svg class="pc-icon">
-                                    <use xlink:href="#custom-user-square"></use>
+                                    <use xlink:href="#custom-direct-inbox"></use>
                                 </svg>
                             </span>
-                            <span class="pc-mtext" data-i18n="Email Templates">Email Templates</span>
+                            <span class="pc-mtext" data-i18n="Email & Settings">Email & Settings</span>
                             <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                         </a>
                         <ul class="pc-submenu"
