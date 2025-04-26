@@ -24,6 +24,8 @@ class ForgotPasswordController extends Controller
 
         event(new ForgotPasswordEvent($user));
 
-        return redirect()->route('login')->with('success', 'Email sent successfully');
+        flash()->success('Email sent successfully');
+
+        return redirect()->route('login');
     }
 }
