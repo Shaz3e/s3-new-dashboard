@@ -4,7 +4,6 @@ namespace App\Http\Requests\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class LoginRequest extends FormRequest
 {
@@ -26,7 +25,6 @@ class LoginRequest extends FormRequest
         return [
             'email' => [
                 'required',
-                Rule::exists(User::class),
             ],
             'password' => [
                 'required',

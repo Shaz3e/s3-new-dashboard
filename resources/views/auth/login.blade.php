@@ -9,17 +9,21 @@
                     <a href="#"><img src="../assets/images/logo-dark.svg" alt="img" /></a>
                 </div>
                 <h4 class="text-center f-w-500 mb-3">Login with your email</h4>
+                @if (session('error'))
+                    <div class="mb-3">
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    </div>
+                @endif
                 <div class="mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="Email Address" />
+                    <x-input type="email" name="email" placeholder="Email Address" required />
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control" id="floatingInput1" placeholder="Password" />
+                    <x-input type="password" name="password" placeholder="Password" required />
                 </div>
                 <div class="d-flex mt-1 justify-content-between align-items-center">
-                    <div class="form-check">
-                        <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                        <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label>
-                    </div>
+                    <x-checkbox name="remember" label="Remember Me" />
                     <h6 class="text-secondary f-w-400 mb-0">
                         <a href="{{ route('forgot') }}"> Forgot Password? </a>
                     </h6>

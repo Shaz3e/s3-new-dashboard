@@ -44,6 +44,9 @@ class RegisterRequest extends FormRequest
                 'required',
                 'same:password',
             ],
+            'agree_terms' => [
+                'required',
+            ],
         ];
     }
 }

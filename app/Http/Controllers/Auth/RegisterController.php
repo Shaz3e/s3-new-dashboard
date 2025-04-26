@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
         $user = User::create($validated);
 
-        // Auto Login
+        flash()->success('You have successfully registered');
 
         return redirect()->route('login');
     }

@@ -13,46 +13,26 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <input type="text" name="first_name" class="form-control" placeholder="First Name" />
-                            @error('first_name')
-                                {{ $message }}
-                            @enderror
+                            <x-input type="text" name="first_name" placeholder="First Name" />
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="mb-3">
-                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" />
-                            @error('last_name')
-                                {{ $message }}
-                            @enderror
+                            <x-input type="text" name="last_name" placeholder="Last Name" />
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" />
-                    @error('email')
-                        {{ $message }}
-                    @enderror
+                    <x-input type="email" name="email" placeholder="Email Address" />
                 </div>
                 <div class="mb-3">
-                    <input type="password" name="password" class="form-control" placeholder="Password" />
-                    @error('password')
-                        {{ $message }}
-                    @enderror
+                    <x-input type="password" name="password" placeholder="Password" />
                 </div>
                 <div class="mb-3">
-                    <input type="password" name="password_confirmation" class="form-control"
-                        placeholder="Confirm Password" />
-                    @error('password_confirmation')
-                        {{ $message }}
-                    @enderror
+                    <x-input type="password" name="password_confirmation" placeholder="Confirm Password" />
                 </div>
                 <div class="d-flex mt-1 justify-content-between">
-                    <div class="form-check">
-                        <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                        <label class="form-check-label text-muted" for="customCheckc1">I agree to all the Terms &
-                            Condition</label>
-                    </div>
+                    <x-checkbox name="agree_terms" label="I agree to all the Terms & Conditions" />
                 </div>
                 <div class="d-grid mt-4">
                     <button type="submit" class="btn btn-primary">Sign up</button>
