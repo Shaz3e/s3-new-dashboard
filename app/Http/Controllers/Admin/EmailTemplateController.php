@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreEmailTemplateRequest;
 use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Shaz3e\EmailBuilder\Facades\EmailBuilder;
 
 class EmailTemplateController extends Controller
@@ -42,6 +43,20 @@ class EmailTemplateController extends Controller
         Gate::authorize('create', EmailTemplate::class);
 
         $validated = $request->validated();
+
+        // Upload images
+        if ($request->hasFile('header_image')) {
+            $validated['header_image'] = $request->file('header_image')
+                ->store('email-templates', 'public');
+        }
+        if ($request->hasFile('footer_image')) {
+            $validated['footer_image'] = $request->file('footer_image')
+                ->store('email-templates', 'public');
+        }
+        if ($request->hasFile('footer_bottom_image')) {
+            $validated['footer_bottom_image'] = $request->file('footer_bottom_image')
+                ->store('email-templates', 'public');
+        }
 
         $emailTemplate = EmailBuilder::addTemplate($validated);
 
@@ -89,6 +104,32 @@ class EmailTemplateController extends Controller
         Gate::authorize('update', $emailTemplate);
 
         $validated = $request->validated();
+
+        // First delete images and then Upload images
+        if ($request->hasFile('header_image')) {
+            // Delete old image
+            if ($emailTemplate->header_image) {
+                Storage::disk('public')->delete($emailTemplate->header_image);
+            }
+            $validated['header_image'] = $request->file('header_image')
+                ->store('email-templates', 'public');
+        }
+        if ($request->hasFile('footer_image')) {
+            // Delete old image
+            if ($emailTemplate->footer_image) {
+                Storage::disk('public')->delete($emailTemplate->footer_image);
+            }
+            $validated['footer_image'] = $request->file('footer_image')
+                ->store('email-templates', 'public');
+        }
+        if ($request->hasFile('footer_bottom_image')) {
+            // Delete old image
+            if ($emailTemplate->footer_bottom_image) {
+                Storage::disk('public')->delete($emailTemplate->footer_bottom_image);
+            }
+            $validated['footer_bottom_image'] = $request->file('footer_bottom_image')
+                ->store('email-templates', 'public');
+        }
 
         $emailTemplate = EmailBuilder::editTemplate($emailTemplate->id, $validated);
 

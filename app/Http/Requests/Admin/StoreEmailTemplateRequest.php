@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\ImageRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -23,36 +24,35 @@ class StoreEmailTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'header' => [
+            'header_image' => [
                 'nullable',
-                'string',
+                new ImageRule,
             ],
-            'footer' => [
+            'header_text' => ['nullable', 'string'],
+            'header_text_color' => ['nullable', 'string'],
+            'header_background_color' => ['nullable', 'string'],
+
+            'footer_image' => [
                 'nullable',
-                'string',
+                new ImageRule,
             ],
-            'name' => [
+            'footer_text' => ['nullable', 'string'],
+            'footer_text_color' => ['nullable', 'string'],
+            'footer_background_color' => ['nullable', 'string'],
+            'footer_bottom_image' => [
+                'nullable',
+                new ImageRule,
+            ],
+            'key' => [
                 'required',
                 'string',
                 'max:255',
-                // 'unique:email_templates,name',
-                // if request method is put, then check for unique name
-                Rule::unique('email_templates', 'name')->ignore($this->email_template),
+                Rule::unique('email_templates', 'key')->ignore($this->email_template),
             ],
-            'subject' => [
-                'required',
-                'string',
-                'min:3',
-                'max:255',
-            ],
-            'body' => [
-                'required',
-                'string',
-            ],
-            'placeholders' => [
-                'nullable',
-                'string',
-            ],
+            'name' => ['required', 'string', 'max:255'],
+            'subject' => ['required', 'string', 'min:3', 'max:255'],
+            'body' => ['required', 'string'],
+            'placeholders' => ['nullable', 'string'],
         ];
     }
 }

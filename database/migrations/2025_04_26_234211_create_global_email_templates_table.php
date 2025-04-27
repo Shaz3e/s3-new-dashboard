@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('global_email_templates', function (Blueprint $table) {
             $table->id();
-            $table->longText('header')->nullable();
-            $table->boolean('default_header')->default(false);
-            $table->longText('footer')->nullable();
-            $table->boolean('default_footer')->default(false);
+            $table->string('header_image')->nullable();
+            $table->longText('header_text')->nullable();
+            $table->string('header_text_color')->nullable();
+            $table->string('header_background_color')->nullable();
+            $table->string('footer_image')->nullable();
+            $table->longText('footer_text')->nullable();
+            $table->string('footer_text_color')->nullable();
+            $table->string('footer_background_color')->nullable();
+            $table->boolean('footer_bottom_image')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
