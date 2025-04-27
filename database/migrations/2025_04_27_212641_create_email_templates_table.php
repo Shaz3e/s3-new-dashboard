@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('subject');
             $table->longText('body');
             $table->json('placeholders')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
