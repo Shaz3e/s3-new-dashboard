@@ -71,6 +71,15 @@
         </div>
         {{-- /.row --}}
 
+         {{-- Save Button --}}
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <x-button text="Save" />
+            </div>
+            {{-- /.col --}}
+        </div>
+        {{-- /.row --}}
+
         {{-- Header --}}
         <div class="row">
             <div class="col-md-12">
