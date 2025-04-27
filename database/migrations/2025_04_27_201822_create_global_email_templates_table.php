@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Shaz3e\EmailBuilder\App\Models\GlobalEmailTemplate;
 
 return new class extends Migration
 {
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('email_templates', function (Blueprint $table) {
+        Schema::create('global_email_templates', function (Blueprint $table) {
             $table->id();
             $table->string('header_image')->nullable();
             $table->longText('header_text')->nullable();
@@ -22,14 +23,22 @@ return new class extends Migration
             $table->string('footer_text_color')->nullable();
             $table->string('footer_background_color')->nullable();
             $table->string('footer_bottom_image')->nullable();
-            $table->string('key')->unique();
-            $table->string('name');
-            $table->text('subject');
-            $table->longText('body');
-            $table->json('placeholders')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
+
+        $globalEmailTempaltes = [
+            'header_image' => null,
+            'header_text' => null,
+            'header_text_color' => null,
+            'header_background_color' => null,
+            'footer_image' => null,
+            'footer_text' => null,
+            'footer_text_color' => null,
+            'footer_background_color' => null,
+            'footer_bottom_image' => null,
+        ];
+
+        GlobalEmailTemplate::create($globalEmailTempaltes);
     }
 
     /**
@@ -37,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('email_templates');
+        Schema::dropIfExists('global_email_templates');
     }
 };

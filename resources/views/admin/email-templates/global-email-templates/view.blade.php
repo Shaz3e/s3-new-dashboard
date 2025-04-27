@@ -8,18 +8,7 @@
     ]" />
 
     <div class="row">
-        @if ($globalEmailTemplate->header)
-            <div class="col-md-12">
-                {!! $globalEmailTemplate->header !!}
-            </div>
-            {{-- /.col --}}
-        @endif
-        @if ($globalEmailTemplate->footer)
-            <div class="col-md-12">
-                {!! $globalEmailTemplate->footer !!}
-            </div>
-            {{-- /.col --}}
-        @endif
+        view
     </div>
     {{-- /.row --}}
 @endsection

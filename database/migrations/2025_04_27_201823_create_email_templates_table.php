@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('global_email_templates', function (Blueprint $table) {
+        Schema::create('email_templates', function (Blueprint $table) {
             $table->id();
             $table->string('header_image')->nullable();
             $table->longText('header_text')->nullable();
@@ -21,8 +21,12 @@ return new class extends Migration
             $table->longText('footer_text')->nullable();
             $table->string('footer_text_color')->nullable();
             $table->string('footer_background_color')->nullable();
-            $table->boolean('footer_bottom_image')->nullable();
-            $table->softDeletes();
+            $table->string('footer_bottom_image')->nullable();
+            $table->string('key')->unique();
+            $table->string('name');
+            $table->text('subject');
+            $table->longText('body');
+            $table->json('placeholders')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('global_email_templates');
+        Schema::dropIfExists('email_templates');
     }
 };

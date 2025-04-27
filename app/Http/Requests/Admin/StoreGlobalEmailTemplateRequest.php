@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\ImageRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreGlobalEmailTemplateRequest extends FormRequest
@@ -22,19 +23,24 @@ class StoreGlobalEmailTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'header' => [
+            'header_image' => [
                 'nullable',
-                'string',
+                new ImageRule,
             ],
-            'default_header' => ['nullable',
-                'in:0,1',
-            ],
-            'footer' => [
+            'header_text' => ['nullable', 'string'],
+            'header_text_color' => ['nullable', 'string'],
+            'header_background_color' => ['nullable', 'string'],
+
+            'footer_image' => [
                 'nullable',
-                'string',
+                new ImageRule,
             ],
-            'default_footer' => ['nullable',
-                'in:0,1',
+            'footer_text' => ['nullable', 'string'],
+            'footer_text_color' => ['nullable', 'string'],
+            'footer_background_color' => ['nullable', 'string'],
+            'footer_bottom_image' => [
+                'nullable',
+                new ImageRule,
             ],
         ];
     }

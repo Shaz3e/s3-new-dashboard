@@ -23,7 +23,7 @@ class RegisterController extends Controller
         $user = User::create($validated);
 
         $email = new EmailBuilderService;
-        $email->sendEmailByName('welcome_email', $user->email, [
+        $email->sendEmailBykey('welcome_email', $user->email, [
             'app_name' => config('app.name'),
             'name' => $user->name,
             'app_url' => config('app.url'),

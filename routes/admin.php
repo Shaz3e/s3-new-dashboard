@@ -32,7 +32,11 @@ Route::prefix('/manage')->group(function () {
     Route::resource('/email-templates', EmailTemplateController::class);
 
     // Global Email Templates
-    Route::resource('/global-email-templates', GlobalEmailTemplateController::class);
+    Route::prefix('/global-email-templates')->name('global-email-templates.')->group(function () {
+        Route::get('/', [GlobalEmailTemplateController::class, 'index'])->name('index');
+        Route::get('/edit', [GlobalEmailTemplateController::class, 'edit'])->name('edit');
+        Route::post('/update', [GlobalEmailTemplateController::class, 'update'])->name('update');
+    });
 });
 
 Route::prefix('app-backup')->group(function () {

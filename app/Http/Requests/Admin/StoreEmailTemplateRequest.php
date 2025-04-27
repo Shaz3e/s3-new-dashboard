@@ -17,6 +17,17 @@ class StoreEmailTemplateRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'header' => $this->has('header') ? 1 : 0,
+            'footer' => $this->has('footer') ? 1 : 0,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -53,6 +64,8 @@ class StoreEmailTemplateRequest extends FormRequest
             'subject' => ['required', 'string', 'min:3', 'max:255'],
             'body' => ['required', 'string'],
             'placeholders' => ['nullable', 'string'],
+            'header' => ['required', 'in:0,1'],
+            'footer' => ['required', 'in:0,1'],
         ];
     }
 }

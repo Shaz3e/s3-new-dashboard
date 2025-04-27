@@ -195,7 +195,7 @@
                             @endcan
                             @can('global-email-templates.list')
                                 <li
-                                    class="pc-item {{ request()->routeIs('admin.global-email-templates.*') ? 'active' : '' }}">
+                                    class="pc-item {{ request()->routeIs('admin.global-email-templates.index') ? 'active' : '' }}">
                                     <a class="pc-link" href="{{ route('admin.global-email-templates.index') }}"
                                         data-i18n="Global Header & Footer">
                                         Global Header & Footer

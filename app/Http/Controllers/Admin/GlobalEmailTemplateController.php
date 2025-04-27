@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreGlobalEmailTemplateRequest;
 use App\Models\GlobalEmailTemplate;
 use Illuminate\Support\Facades\Gate;
-use Shaz3e\EmailBuilder\Facades\EmailBuilder;
+use Illuminate\Support\Facades\Storage;
 
 class GlobalEmailTemplateController extends Controller
 {
@@ -17,80 +17,63 @@ class GlobalEmailTemplateController extends Controller
     {
         Gate::authorize('viewAny', GlobalEmailTemplate::class);
 
+        $globalEmailTemplate = GlobalEmailTemplate::first();
+
         return view('admin.email-templates.global-email-templates.index', [
             'title' => 'Global Email Templates',
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        Gate::authorize('create', GlobalEmailTemplate::class);
-
-        return view('admin.email-templates.global-email-templates.create', [
-            'title' => 'Create Global Header & Footer',
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreGlobalEmailTemplateRequest $request)
-    {
-        Gate::authorize('create', GlobalEmailTemplate::class);
-
-        $validated = $request->validated();
-
-        $globalEmailTemplate = EmailBuilder::addGlobalTemplate($validated);
-
-        flash()->success('Global Header & Footer has been created');
-
-        return redirect()->route('admin.global-email-templates.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(GlobalEmailTemplate $globalEmailTemplate)
-    {
-        Gate::authorize('view', $globalEmailTemplate);
-
-        $globalEmailTemplate = EmailBuilder::viewGlobalEmailTemplate($globalEmailTemplate->id);
-
-        return view('admin.email-templates.global-email-templates.show', [
-            'title' => 'View Global Header & Footer',
             'globalEmailTemplate' => $globalEmailTemplate,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(GlobalEmailTemplate $globalEmailTemplate)
+    public function edit()
     {
-        Gate::authorize('update', $globalEmailTemplate);
+        Gate::authorize('create', GlobalEmailTemplate::class);
+
+        $globalEmailTemplate = GlobalEmailTemplate::first();
 
         return view('admin.email-templates.global-email-templates.edit', [
-            'title' => 'Edit Global Header & Footer',
             'globalEmailTemplate' => $globalEmailTemplate,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(StoreGlobalEmailTemplateRequest $request, GlobalEmailTemplate $globalEmailTemplate)
+    public function update(StoreGlobalEmailTemplateRequest $request)
     {
-        Gate::authorize('update', $globalEmailTemplate);
+        Gate::authorize('update', GlobalEmailTemplate::class);
 
         $validated = $request->validated();
 
-        $globalEmailTemplate = EmailBuilder::editGlobalEmailTemplate($globalEmailTemplate->id, $validated);
+        $globalEmailTemplate = GlobalEmailTemplate::first();
 
-        flash()->success('Global Header & Footer has been updated');
+        // First delete images and then Upload images
+        if ($request->hasFile('header_image')) {
+            // Delete old image
+            if ($globalEmailTemplate->header_image) {
+                Storage::disk('public')->delete($globalEmailTemplate->header_image);
+            }
+            $validated['header_image'] = $request->file('header_image')
+                ->store('global-email-templates', 'public');
+        }
+        if ($request->hasFile('footer_image')) {
+            // Delete old image
+            if ($globalEmailTemplate->footer_image) {
+                Storage::disk('public')->delete($globalEmailTemplate->footer_image);
+            }
+            $validated['footer_image'] = $request->file('footer_image')
+                ->store('global-email-templates', 'public');
+        }
+        if ($request->hasFile('footer_bottom_image')) {
+            // Delete old image
+            if ($globalEmailTemplate->footer_bottom_image) {
+                Storage::disk('public')->delete($globalEmailTemplate->footer_bottom_image);
+            }
+            $validated['footer_bottom_image'] = $request->file('footer_bottom_image')
+                ->store('global-email-templates', 'public');
+        }
 
-        return redirect()->route('admin.global-email-templates.index');
+        $globalEmailTemplate->update($validated);
+
+        flash()->success('Global Header & Footer are updated');
+
+        return back();
     }
 }

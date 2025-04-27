@@ -42,21 +42,7 @@ class EmailTemplateController extends Controller
     {
         Gate::authorize('create', EmailTemplate::class);
 
-        $validated = $request->validated();
-
-        // Upload images
-        if ($request->hasFile('header_image')) {
-            $validated['header_image'] = $request->file('header_image')
-                ->store('email-templates', 'public');
-        }
-        if ($request->hasFile('footer_image')) {
-            $validated['footer_image'] = $request->file('footer_image')
-                ->store('email-templates', 'public');
-        }
-        if ($request->hasFile('footer_bottom_image')) {
-            $validated['footer_bottom_image'] = $request->file('footer_bottom_image')
-                ->store('email-templates', 'public');
-        }
+        $validated = $this->processRequest($request);
 
         $emailTemplate = EmailBuilder::addTemplate($validated);
 
@@ -103,38 +89,63 @@ class EmailTemplateController extends Controller
     {
         Gate::authorize('update', $emailTemplate);
 
-        $validated = $request->validated();
-
-        // First delete images and then Upload images
-        if ($request->hasFile('header_image')) {
-            // Delete old image
-            if ($emailTemplate->header_image) {
-                Storage::disk('public')->delete($emailTemplate->header_image);
-            }
-            $validated['header_image'] = $request->file('header_image')
-                ->store('email-templates', 'public');
-        }
-        if ($request->hasFile('footer_image')) {
-            // Delete old image
-            if ($emailTemplate->footer_image) {
-                Storage::disk('public')->delete($emailTemplate->footer_image);
-            }
-            $validated['footer_image'] = $request->file('footer_image')
-                ->store('email-templates', 'public');
-        }
-        if ($request->hasFile('footer_bottom_image')) {
-            // Delete old image
-            if ($emailTemplate->footer_bottom_image) {
-                Storage::disk('public')->delete($emailTemplate->footer_bottom_image);
-            }
-            $validated['footer_bottom_image'] = $request->file('footer_bottom_image')
-                ->store('email-templates', 'public');
-        }
+        $validated = $this->processRequest($request, $emailTemplate);
 
         $emailTemplate = EmailBuilder::editTemplate($emailTemplate->id, $validated);
 
         flash()->success('Email Template has been updated');
 
         return redirect()->route('admin.email-templates.index');
+    }
+
+    private function processRequest(StoreEmailTemplateRequest $request, ?EmailTemplate $emailTemplate = null): array
+    {
+        $validated = $request->validated();
+
+        // Handle images
+        $validated = $this->handleImages($request, $validated, $emailTemplate);
+
+        // Remove fields if header/footer not selected
+        $validated = $this->filterFields($validated);
+
+        return $validated;
+    }
+
+    private function handleImages(StoreEmailTemplateRequest $request, array $validated, ?EmailTemplate $emailTemplate = null): array
+    {
+        $imageFields = ['header_image', 'footer_image', 'footer_bottom_image'];
+
+        foreach ($imageFields as $field) {
+            if ($request->hasFile($field)) {
+                // If updating, delete old image
+                if ($emailTemplate && $emailTemplate->{$field}) {
+                    Storage::disk('public')->delete($emailTemplate->{$field});
+                }
+
+                $validated[$field] = $request->file($field)->store('email-templates', 'public');
+            }
+        }
+
+        return $validated;
+    }
+
+    private function filterFields(array $validated): array
+    {
+        if (empty($validated['header'])) {
+            $validated['header_image'] = null;
+            $validated['header_text'] = null;
+            $validated['header_text_color'] = null;
+            $validated['header_background_color'] = null;
+        }
+
+        if (empty($validated['footer'])) {
+            $validated['footer_image'] = null;
+            $validated['footer_text'] = null;
+            $validated['footer_text_color'] = null;
+            $validated['footer_background_color'] = null;
+            $validated['footer_bottom_image'] = null;
+        }
+
+        return $validated;
     }
 }

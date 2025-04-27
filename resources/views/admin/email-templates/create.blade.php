@@ -26,6 +26,13 @@
                                 </div>
                             </div>
                             {{-- /.col --}}
+                            <div class="col-md-12 col-sm-12">
+                                <x-checkbox name="header" label="Create Header for this Email Template"
+                                    help_text="Check this box to show template specific header otherwise default header will be used" />
+                                <x-checkbox name="footer" label="Create Footer for this Email Template"
+                                    help_text="Check this box to show template specific footer otherwise default footer will be used" />
+                            </div>
+                            {{-- /.col --}}
                         </div>
                         {{-- /.row --}}
                     </div>
@@ -71,7 +78,7 @@
         </div>
         {{-- /.row --}}
 
-         {{-- Save Button --}}
+        {{-- Save Button --}}
         <div class="row">
             <div class="col-md-12 mb-5">
                 <x-button text="Save" />
@@ -81,7 +88,7 @@
         {{-- /.row --}}
 
         {{-- Header --}}
-        <div class="row">
+        <div class="row header-template" style="dispaly:none;">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -119,6 +126,10 @@
                         {{-- /.row --}}
                     </div>
                     {{-- /.card-body --}}
+                    <div class="card-footer">
+                        <x-button text="Save" />
+                    </div>
+                    {{-- /.card-footer --}}
                 </div>
                 {{-- /.card --}}
             </div>
@@ -127,7 +138,7 @@
         {{-- /.row --}}
 
         {{-- Footer --}}
-        <div class="row">
+        <div class="row footer-template" style="display: none;">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -171,17 +182,12 @@
                         {{-- /.row --}}
                     </div>
                     {{-- /.card-body --}}
+                    <div class="card-footer">
+                        <x-button text="Save" />
+                    </div>
+                    {{-- /.card-footer --}}
                 </div>
                 {{-- /.card --}}
-            </div>
-            {{-- /.col --}}
-        </div>
-        {{-- /.row --}}
-
-        {{-- Save Button --}}
-        <div class="row">
-            <div class="col-md-12 mb-5">
-                <x-button text="Save" />
             </div>
             {{-- /.col --}}
         </div>
@@ -193,6 +199,15 @@
 @endpush
 @push('scripts')
     <script>
+        // show header and footer template based on checkbox
+        document.getElementById('header').addEventListener('change', function() {
+            const headerTemplate = document.querySelector('.header-template');
+            headerTemplate.style.display = this.checked ? 'block' : 'none';
+        });
+        document.getElementById('footer').addEventListener('change', function() {
+            const footerTemplate = document.querySelector('.footer-template');
+            footerTemplate.style.display = this.checked ? 'block' : 'none';
+        });
         document.addEventListener('DOMContentLoaded', () => {
             const subjectInput = document.getElementById('key');
 

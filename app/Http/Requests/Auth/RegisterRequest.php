@@ -19,6 +19,16 @@ class RegisterRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'agree_terms' => $this->has('agree_terms') ? 1 : 0,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -45,7 +55,7 @@ class RegisterRequest extends FormRequest
                 'same:password',
             ],
             'agree_terms' => [
-                'required',
+                'accepted',
             ],
         ];
     }
