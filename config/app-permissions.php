@@ -43,4 +43,8 @@ return [
         'restore',
         'force.delete',
     ],
+
+    'settings' => [
+        'list',
+    ],
 ];

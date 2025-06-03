@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\GlobalEmailTemplateController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\Settings\ApplicationSettingController;
+use App\Http\Controllers\Admin\Settings\EmailSettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
@@ -44,4 +46,12 @@ Route::prefix('app-backup')->group(function () {
     Route::post('/', [AppBackupController::class, 'store'])->name('app-backup.store');
     Route::get('/download/{fileName}', [AppBackupController::class, 'download'])->name('app-backup.download');
     Route::delete('/delete/{fileName}', [AppBackupController::class, 'delete'])->name('app-backup.delete');
+});
+
+Route::prefix('settings')->name('settings.')->group(function () {
+    Route::get('/', [ApplicationSettingController::class, 'view']);
+    Route::post('/', [ApplicationSettingController::class, 'store'])->name('application');
+
+    Route::get('/email', [EmailSettingController::class, 'view']);
+    Route::post('/email', [EmailSettingController::class, 'store'])->name('email');
 });
