@@ -3,8 +3,9 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ route('admin.dashboard') }}" class="b-brand text-primary">
-                <!-- ========   Change your logo from here   ============ -->
-                <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo" />
+                <img src="{{ asset(setting('dark_logo')) }}" class="img-fluid logo-lg" alt="logo"
+                    data-dark-logo="{{ asset(setting('dark_logo')) }}"
+                    data-light-logo="{{ asset(setting('light_logo')) }}" />
                 <span class="badge bg-light-success rounded-pill ms-2 theme-version">v9.5.1</span>
             </a>
         </div>
@@ -32,10 +33,12 @@
                                 <i class="ti ti-user"></i>
                                 <span data-i18n="My Account">My Account</span>
                             </a>
-                            <a href="#!">
-                                <i class="ti ti-settings"></i>
-                                <span data-i18n="Settings">Settings</span>
-                            </a>
+                            @can('settings.list')
+                                <a href="{{ route('admin.settings.application') }}">
+                                    <i class="ti ti-settings"></i>
+                                    <span data-i18n="Settings">Settings</span>
+                                </a>
+                            @endcan
                             <a href="{{ route('locked') }}">
                                 <i class="ti ti-lock"></i>
                                 <span data-i18n="Lock My Account">Lock My Account</span>

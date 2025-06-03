@@ -12,7 +12,9 @@
         content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
     <meta name="author" content="Phoenixcoded" />
 
-    <link rel="icon" href="{{ asset('assets/images/favicon.svgassets/images/favicon.svg') }}" type="image/x-icon" />
+    @if (setting('favicon'))
+        <link rel="icon" href="{{ asset(setting('favicon')) }}" type="image/x-icon" />
+    @endif
 
     <link rel="stylesheet" href="{{ asset('assets/fonts/inter/inter.css') }}" id="main-font-link" />
 
@@ -94,6 +96,11 @@
 
     <script>
         main_layout_change('vertical');
+    </script>
+
+    <script>
+        const DARK_LOGO = "{{ asset(setting('dark_logo')) }}";
+        const LIGHT_LOGO = "{{ asset(setting('light_logo')) }}";
     </script>
 
     @stack('scripts')

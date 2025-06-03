@@ -198,40 +198,36 @@ function layout_rtl_change(value) {
 
 // Function to handle layout change (dark/light) and update related elements
 function layout_change(layout) {
-  // Set the layout theme attribute on the body element
-  document.getElementsByTagName('body')[0].setAttribute('data-pc-theme', layout);
+    document.getElementsByTagName('body')[0].setAttribute('data-pc-theme', layout);
 
-  // Deactivate the default layout button if it exists
-  var defaultBtnControl = document.querySelector('.theme-layout .btn[data-value="default"]');
-  if (defaultBtnControl) {
-    defaultBtnControl.classList.remove('active');
+    var defaultBtnControl = document.querySelector('.theme-layout .btn[data-value="default"]');
+    if (defaultBtnControl) {
+      defaultBtnControl.classList.remove('active');
+    }
+
+    if (layout === 'dark') {
+      dark_flag = true;
+
+      // ✅ Use dynamic dark logo from Laravel
+      updateLogo('.pc-sidebar .m-header .logo-lg', typeof DARK_LOGO !== 'undefined' ? DARK_LOGO : '../assets/images/logo-white.svg');
+      updateLogo('.navbar-brand .logo-lg', typeof DARK_LOGO !== 'undefined' ? DARK_LOGO : '../assets/images/logo-white.svg');
+      updateLogo('.auth-main.v1 .auth-sidefooter img', typeof DARK_LOGO !== 'undefined' ? DARK_LOGO : '../assets/images/logo-white.svg');
+      updateLogo('.footer-top .footer-logo', typeof DARK_LOGO !== 'undefined' ? DARK_LOGO : '../assets/images/logo-white.svg');
+
+      updateActiveButton('.theme-layout .btn[data-value="false"]');
+    } else {
+      dark_flag = false;
+
+      // ✅ Use dynamic light logo from Laravel
+      updateLogo('.pc-sidebar .m-header .logo-lg', typeof LIGHT_LOGO !== 'undefined' ? LIGHT_LOGO : '../assets/images/logo-dark.svg');
+      updateLogo('.navbar-brand .logo-lg', typeof LIGHT_LOGO !== 'undefined' ? LIGHT_LOGO : '../assets/images/logo-dark.svg');
+      updateLogo('.auth-main.v1 .auth-sidefooter img', typeof LIGHT_LOGO !== 'undefined' ? LIGHT_LOGO : '../assets/images/logo-dark.svg');
+      updateLogo('.footer-top .footer-logo', typeof LIGHT_LOGO !== 'undefined' ? LIGHT_LOGO : '../assets/images/logo-dark.svg');
+
+      updateActiveButton('.theme-layout .btn[data-value="true"]');
+    }
   }
 
-  // Check if the theme is 'dark' and adjust logos and button states accordingly
-  if (layout === 'dark') {
-    dark_flag = true;
-
-    // Update logo to white version for dark theme
-    updateLogo('.pc-sidebar .m-header .logo-lg', '../assets/images/logo-white.svg');
-    updateLogo('.navbar-brand .logo-lg', '../assets/images/logo-white.svg');
-    updateLogo('.auth-main.v1 .auth-sidefooter img', '../assets/images/logo-white.svg');
-    updateLogo('.footer-top .footer-logo', '../assets/images/logo-white.svg');
-
-    // Update active button state for dark theme
-    updateActiveButton('.theme-layout .btn[data-value="false"]');
-  } else {
-    dark_flag = false;
-
-    // Update logo to dark version for light theme
-    updateLogo('.pc-sidebar .m-header .logo-lg', '../assets/images/logo-dark.svg');
-    updateLogo('.navbar-brand .logo-lg', '../assets/images/logo-dark.svg');
-    updateLogo('.auth-main.v1 .auth-sidefooter img', '../assets/images/logo-dark.svg');
-    updateLogo('.footer-top .footer-logo', '../assets/images/logo-dark.svg');
-
-    // Update active button state for light theme
-    updateActiveButton('.theme-layout .btn[data-value="true"]');
-  }
-}
 
 // Helper function to update the logo image source
 function updateLogo(selector, newSrc) {
