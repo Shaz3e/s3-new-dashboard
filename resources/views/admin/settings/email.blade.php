@@ -44,8 +44,12 @@
                             {{-- /.col --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <x-input type="text" name="mail_encryption" label="SMTP Encryption"
-                                        value="{{ config('mail.mailers.smtp.encryption') }}" required />
+                                    <x-select name="mail_encryption" label="{{ __('SMTP Encryption') }}" :options="[
+                                        'ssl' => 'SSL',
+                                        'tls' => 'TLS',
+                                        'null' => 'None',
+                                    ]"
+                                        :selected="config('mail.mailers.smtp.encryption')" required="true" />
                                 </div>
                             </div>
                             {{-- /.col --}}
