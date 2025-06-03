@@ -28,16 +28,13 @@ return [
         'restore',
         'force.delete',
     ],
-    'email-templates' => [
+    'global-email-templates' => [
         'list',
         'create',
         'read',
         'update',
-        'delete',
-        'restore',
-        'force.delete',
     ],
-    'global-email-templates' => [
+    'email-templates' => [
         'list',
         'create',
         'read',
