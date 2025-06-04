@@ -22,22 +22,14 @@ class PasswordResetController extends Controller
 
         // Check token
         $token = DB::table('password_reset_tokens')
-            ->where('token', $request->token)
+            ->where([
+                'token' => $request->token,
+                'email' => $request->email,
+            ])
             ->exists();
 
         if (! $token) {
-            return 'Password reset token is invalid or expired';
-
-            return redirect()->route('login');
-        }
-
-        // Check email
-        $email = DB::table('password_reset_tokens')
-            ->where('email', $request->email)
-            ->exists();
-
-        if (! $email) {
-            return 'Password reset token is not valid for this email';
+            session()->flash('error', 'Password reset token is invalid or expired');
 
             return redirect()->route('login');
         }
@@ -47,10 +39,10 @@ class PasswordResetController extends Controller
         $user->password = bcrypt($validated['password']);
         $user->save();
 
-        // Delete token
-        DB::table('password_reset_tokens')
-            ->where('email', $request->email)
-            ->delete();
+        // Delete Token
+        DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
+        session()->flash('success', 'Password reset successfully');
 
         return to_route('login');
     }

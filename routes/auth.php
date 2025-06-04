@@ -18,8 +18,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordForm']);
     Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgot');
 
-    Route::get('/reset/{email}/{token}', [PasswordResetController::class, 'resetForm']);
-    Route::post('/reset', [PasswordResetController::class, 'reset'])->name('password.reset');
+    Route::get('/reset/{email}/{token}', [PasswordResetController::class, 'resetForm'])->name('password.reset');
+    Route::post('/reset', [PasswordResetController::class, 'reset'])->name('password.reset.store');
 });
 
 // Verification

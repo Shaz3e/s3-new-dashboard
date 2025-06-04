@@ -37,7 +37,7 @@ class ForgotPasswordListener
             'created_at' => now(),
         ]);
 
-        $url = route('password.reset', $event->user->email . '/' . $token);
+        $url = route('password.reset', ['email' => $event->user->email, 'token' => $token]);
 
         $email = new EmailBuilderService;
         $email->sendEmailBykey('forget_password', $event->user->email, [
