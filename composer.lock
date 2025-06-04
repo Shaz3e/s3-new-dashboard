@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c2833effa1d14e439feabe88c49f99f",
+    "content-hash": "f7b051e16259e968a2739f50c0f97f15",
     "packages": [
         {
             "name": "brick/math",
@@ -4215,16 +4215,16 @@
         },
         {
             "name": "shaz3e/email-builder",
-            "version": "v0.4",
+            "version": "v0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shaz3e/email-builder.git",
-                "reference": "dffadd5bba2e2f3582abf0f379070939230e8a2f"
+                "reference": "3277c2f78650d472cc9cfff813e19347d26801c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shaz3e/email-builder/zipball/dffadd5bba2e2f3582abf0f379070939230e8a2f",
-                "reference": "dffadd5bba2e2f3582abf0f379070939230e8a2f",
+                "url": "https://api.github.com/repos/Shaz3e/email-builder/zipball/3277c2f78650d472cc9cfff813e19347d26801c2",
+                "reference": "3277c2f78650d472cc9cfff813e19347d26801c2",
                 "shasum": ""
             },
             "type": "library",
@@ -4253,9 +4253,9 @@
             "description": "Create Email from frontend and use palceholder within email",
             "support": {
                 "issues": "https://github.com/Shaz3e/email-builder/issues",
-                "source": "https://github.com/Shaz3e/email-builder/tree/v0.4"
+                "source": "https://github.com/Shaz3e/email-builder/tree/v0.6"
             },
-            "time": "2025-04-27T21:22:21+00:00"
+            "time": "2025-06-04T18:24:26+00:00"
         },
         {
             "name": "spatie/db-dumper",
@@ -9864,12 +9864,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
