@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\Events\ForgotPasswordEvent;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Shaz3e\EmailBuilder\Services\EmailBuilderService;
 
