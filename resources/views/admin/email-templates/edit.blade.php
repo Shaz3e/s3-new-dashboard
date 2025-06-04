@@ -31,8 +31,10 @@
                             {{-- /.col --}}
                             <div class="col-md-12 col-sm-12">
                                 <x-checkbox name="header" label="Create Header for this Email Template"
+                                    checked="{{ $emailTemplate->header }}"
                                     help_text="Check this box to show template specific header otherwise default header will be used" />
                                 <x-checkbox name="footer" label="Create Footer for this Email Template"
+                                    checked="{{ $emailTemplate->footer }}"
                                     help_text="Check this box to show template specific footer otherwise default footer will be used" />
                             </div>
                             {{-- /.col --}}
@@ -93,7 +95,7 @@
         {{-- /.row --}}
 
         {{-- Header --}}
-        <div class="row header-template" style="display: none;">
+        <div class="row header-template" style="{{ $emailTemplate->header ? 'display:block' : 'display:none' }}">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -148,7 +150,7 @@
         {{-- /.row --}}
 
         {{-- Footer --}}
-        <div class="row footer-template" style="display: none;">
+        <div class="row footer-template" style="{{ $emailTemplate->footer ? 'display:block' : 'display:none' }}">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
