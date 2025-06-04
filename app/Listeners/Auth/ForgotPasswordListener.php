@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Auth;
 
 use App\Events\Auth\ForgotPasswordEvent;
 use Illuminate\Support\Facades\DB;
