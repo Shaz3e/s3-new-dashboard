@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\Auth\VerificationCodeEvent;
 use App\Models\User;
 
 class UserObserver
@@ -21,6 +22,10 @@ class UserObserver
         // First Name and Last Name
         $user->name = $user->first_name.' '.$user->last_name;
         $user->saveQuietly();
+
+        // Send Verification Code via Email
+        event(new VerificationCodeEvent($user));
+
     }
 
     /**

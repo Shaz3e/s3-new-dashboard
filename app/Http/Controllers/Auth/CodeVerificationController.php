@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Auth\VerificationCodeEvent;
+use App\Events\Auth\WelcomeEmailEvent;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Services\EmailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,8 +13,7 @@ class CodeVerificationController extends Controller
 {
     public function verification(Request $request)
     {
-        // login user via request eamil
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (! $user) {
             return to_route('login');
@@ -37,16 +37,18 @@ class CodeVerificationController extends Controller
     public function store(Request $request)
     {
         $codeInput = implode('', $request->input('code')); // Combine the 4 digits into one string
-        $user = auth()->user();
+        $user = Auth::user();
 
         if ($user->verification_code == $codeInput) {
             // Mark the user as verified
             $user->email_verified_at = now();
+            /** @var \App\Models\User $user */
             $user->save();
 
-            flash()->success('Welcome '.$user->name);
+            // Send Welcome Email
+            event(new WelcomeEmailEvent($user));
 
-            $this->sendWelcomeEmail();
+            flash()->success('Welcome '.$user->name);
 
             if ($user->is_admin) {
                 return redirect()->route('admin.dashboard');
@@ -78,25 +80,10 @@ class CodeVerificationController extends Controller
 
     public function resendVerificationCode(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        // Generate a 4-digit random verification code
-        $code = random_int(1000, 9999);
+        event(new VerificationCodeEvent($user));
 
-        // Save code to user's record or session for verification
-        $user->verification_code = $code;
-        $user->save();
-
-        $verification_link = route('verification');
-
-        $emailService = new EmailService; // Create instance of EmailService
-
-        $emailService->sendEmailByKey('verify_account', $user->email, [
-            'name' => $user->name,
-            'verification_code' => $user->verification_code,
-            'verification_link' => $verification_link,
-            'app_name' => config('app.name'),
-        ]);
         flash()->success('Verification code has been sent to your email.');
 
         return back();
@@ -114,20 +101,5 @@ class CodeVerificationController extends Controller
         $maskedName = $name;
 
         return $maskedName.'@'.$domain;
-    }
-
-    private function sendWelcomeEmail()
-    {
-        $user = auth()->user();
-
-        $login_url = route('login');
-
-        $emailService = new EmailService; // Create instance of EmailService
-
-        $emailService->sendEmailByKey('welcome_email', $user->email, [
-            'app_name' => config('app.name'),
-            'name' => $user->name,
-            'login_url' => $login_url,
-        ]);
     }
 }

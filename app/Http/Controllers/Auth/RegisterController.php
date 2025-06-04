@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\Auth\WelcomeEmailEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -22,9 +22,9 @@ class RegisterController extends Controller
 
         $user = User::create($validated);
 
-        event(new WelcomeEmailEvent($user));
-
         flash()->success('You have successfully registered');
+
+        Auth::login($user);
 
         return redirect()->route('verification');
     }
