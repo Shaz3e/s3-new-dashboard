@@ -15,7 +15,7 @@
                 </div>
                 <p class="mt-4 text-sm text-muted">Do not forgot to check SPAM box.</p>
                 <div class="d-grid mt-3">
-                    <button type="submit" class="btn btn-primary">Send Password Reset Email</button>
+                    <x-button text="Reset Password" />
                 </div>
             </form>
         </div>

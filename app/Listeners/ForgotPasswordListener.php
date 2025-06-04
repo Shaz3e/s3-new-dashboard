@@ -4,7 +4,9 @@ namespace App\Listeners;
 
 use App\Events\ForgotPasswordEvent;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Shaz3e\EmailBuilder\Services\EmailBuilderService;
 
 class ForgotPasswordListener
 {
@@ -33,6 +35,15 @@ class ForgotPasswordListener
             'email' => $event->user->email,
             'token' => $token,
             'created_at' => now(),
+        ]);
+
+        $url = route('password.reset', $event->user->email . '/' . $token);
+
+        $email = new EmailBuilderService;
+        $email->sendEmailBykey('forget_password', $event->user->email, [
+            'name' => $event->user->name,
+            'url' => $url,
+            'app_name' => config('app.name'),
         ]);
     }
 }

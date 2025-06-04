@@ -24,7 +24,7 @@
                         placeholder="Confirm Password" />
                 </div>
                 <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-primary">Reset Password</button>
+                    <x-button text="Reset Password" />
                 </div>
             </form>
         </div>
