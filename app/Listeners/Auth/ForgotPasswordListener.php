@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\ForgotPasswordEvent;
+use App\Events\Auth\ForgotPasswordEvent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Shaz3e\EmailBuilder\Services\EmailBuilderService;
@@ -12,10 +12,7 @@ class ForgotPasswordListener
     /**
      * Create the event listener.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct() {}
 
     /**
      * Handle the event.

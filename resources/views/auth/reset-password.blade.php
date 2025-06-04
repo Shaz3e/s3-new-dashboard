@@ -9,8 +9,16 @@
                 <input type="hidden" name="token" value="{{ request('token') }}" />
                 <input type="hidden" name="email" value="{{ request('email') }}" />
 
-                <a href="{{ config('app.url') }}"><img src="{{ asset('assets/images/logo-dark.svg') }}"
-                        class="mb-4 img-fluid" alt="img" /></a>
+
+                <a href="{{ setting('site_url') ?? config('app_url') }}" class="b-brand text-primary">
+                    @if (setting('dark_logo') || setting('light_logo'))
+                        <img src="{{ asset(setting('dark_logo')) }}" class="img-fluid logo-lg" alt="logo"
+                            data-dark-logo="{{ asset(setting('dark_logo')) }}"
+                            data-light-logo="{{ asset(setting('light_logo')) }}" />
+                    @else
+                        {{ setting('app_name') ?? config('app.name') }}
+                    @endif
+                </a>
                 <div class="mb-4">
                     <h3 class="mb-2"><b>Reset Password</b></h3>
                     <p class="text-muted">Please choose your new password</p>

@@ -24,6 +24,7 @@ class ApplicationSettingController extends Controller
         $validated = $request->validate([
             'app_name' => 'required|max:255',
             'app_url' => 'required|url',
+            'site_url' => 'required|url',
             'dark_logo' => 'image|mimes:png,jpg|max:2048',
             'light_logo' => 'image|mimes:png,jpg|max:2048',
             'favicon' => 'image|mimes:png,jpg|max:2048',

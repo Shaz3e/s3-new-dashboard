@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Auth;
 
 use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -8,14 +8,17 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ForgotPasswordEvent
+class WelcomeEmailEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public User $user) {}
+    public function __construct(public User $user)
+    {
+        //
+    }
 
     /**
      * Get the channels the event should broadcast on.

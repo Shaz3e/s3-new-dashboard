@@ -22,7 +22,13 @@
                                 </div>
                             </div>
                             {{-- /.col --}}
-
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <x-input type="text" name="site_url" label="Website URL"
+                                        value="{{ setting('app_url') ?? config('app.url') }}" required />
+                                </div>
+                            </div>
+                            {{-- /.col --}}
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <x-input type="text" name="app_url" label="Application URL"

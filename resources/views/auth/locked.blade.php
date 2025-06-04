@@ -6,7 +6,15 @@
             <form action="{{ route('locked') }}" method="POST" data-validate>
                 @csrf
                 <div class="py-3">
-                    <a href="#"><img src="../assets/images/logo-dark.svg" alt="img" /></a>
+                    <a href="{{ setting('site_url') ?? config('app_url') }}" class="b-brand text-primary">
+                        @if (setting('dark_logo') || setting('light_logo'))
+                            <img src="{{ asset(setting('dark_logo')) }}" class="img-fluid logo-lg" alt="logo"
+                                data-dark-logo="{{ asset(setting('dark_logo')) }}"
+                                data-light-logo="{{ asset(setting('light_logo')) }}" />
+                        @else
+                            {{ setting('app_name') ?? config('app.name') }}
+                        @endif
+                    </a>
                 </div>
                 <div class="d-flex justify-content-between align-items-end mb-4">
                     <h3 class="mb-0"><b>Unlock Your Account</b></h3>
@@ -20,7 +28,7 @@
 
 
                 <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-primary">Unlock My Account</button>
+                    <x-button text="Unlock My Account" class="btn-primary" />
                 </div>
 
             </form>

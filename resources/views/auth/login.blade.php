@@ -6,7 +6,15 @@
             <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="text-center py-3">
-                    <a href="#"><img src="../assets/images/logo-dark.svg" alt="img" /></a>
+                    <a href="{{ setting('site_url') ?? config('app_url') }}" class="b-brand text-primary">
+                        @if (setting('dark_logo') || setting('light_logo'))
+                            <img src="{{ asset(setting('dark_logo')) }}" class="img-fluid logo-lg" alt="logo"
+                                data-dark-logo="{{ asset(setting('dark_logo')) }}"
+                                data-light-logo="{{ asset(setting('light_logo')) }}" />
+                        @else
+                            {{ setting('app_name') ?? config('app.name') }}
+                        @endif
+                    </a>
                 </div>
                 <h4 class="text-center f-w-500 mb-3">Login with your email</h4>
                 @if (session('error'))

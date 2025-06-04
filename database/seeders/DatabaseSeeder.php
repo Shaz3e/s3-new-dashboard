@@ -34,6 +34,6 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
         ]);
 
-        // $this->call(EmailTemplateSeeder::class);
+        $this->call(EmailTemplateSeeder::class);
     }
 }
