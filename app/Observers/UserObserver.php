@@ -38,6 +38,11 @@ class UserObserver
             $user->name = $user->first_name.' '.$user->last_name;
             $user->saveQuietly();
         }
+
+        if ($user->isDirty('email_verified_at')) {
+            $user->is_active = true;
+            $user->saveQuietly();
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Auth\VerificationCodeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
@@ -21,7 +22,6 @@ class LoginController extends Controller
         $validated = $request->validated();
 
         $user = User::where('email', $validated['email'])->first();
-
         // Check user exists
         if (! $user) {
             flash()->error('Email is not exists in our record.');
@@ -37,13 +37,11 @@ class LoginController extends Controller
 
         // Check if user verified their email
         if (is_null($user->email_verified_at)) {
+            Auth::login($user);
+            event(new VerificationCodeEvent($user));
+            flash()->success('Verification code has been sent to your email.');
 
-            // Generate a 4-digit random verification code
-            $code = random_int(1000, 9999);
-
-            // Save code to user's record or session for verification
-            $user->verification_code = $code;
-            $user->save();
+            return to_route('verification');
         }
 
         // User Active false
