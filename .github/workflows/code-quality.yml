@@ -32,14 +32,6 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Skip package discover if Spatie config fails
-        run: |
-          if php artisan package:discover; then
-            echo "Package discover successful"
-          else
-            echo "Skipping package discover due to config error (e.g., Spatie Backup)"
-          fi
-
       - name: Get Modified Files
         id: changed_files
         run: |
@@ -58,7 +50,7 @@ jobs:
       - name: Auto Commit Fixes
         if: env.FILES != ''
         id: auto_commit
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "Apply automated code quality fixes"
           commit_user_name: "GitHub Action"
@@ -71,7 +63,7 @@ jobs:
 
       - name: Commit .git-blame-ignore-revs Update
         if: env.FILES != ''
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "Update .git-blame-ignore-revs with formatting commit"
           commit_user_name: "GitHub Action"
