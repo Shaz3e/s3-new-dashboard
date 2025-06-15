@@ -4214,16 +4214,16 @@
         },
         {
             "name": "shaz3e/email-builder",
-            "version": "v0.7.1",
+            "version": "v0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shaz3e/email-builder.git",
-                "reference": "3154eaed23d23e35188c480d7a910b1bf9d29b28"
+                "reference": "015f329f81d4975a7fcc321f94ab6bc1628d6d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shaz3e/email-builder/zipball/3154eaed23d23e35188c480d7a910b1bf9d29b28",
-                "reference": "3154eaed23d23e35188c480d7a910b1bf9d29b28",
+                "url": "https://api.github.com/repos/Shaz3e/email-builder/zipball/015f329f81d4975a7fcc321f94ab6bc1628d6d71",
+                "reference": "015f329f81d4975a7fcc321f94ab6bc1628d6d71",
                 "shasum": ""
             },
             "type": "library",
@@ -4252,9 +4252,9 @@
             "description": "Create Email from frontend and use palceholder within email",
             "support": {
                 "issues": "https://github.com/Shaz3e/email-builder/issues",
-                "source": "https://github.com/Shaz3e/email-builder/tree/v0.7.1"
+                "source": "https://github.com/Shaz3e/email-builder/tree/v0.7.2"
             },
-            "time": "2025-06-15T17:05:18+00:00"
+            "time": "2025-06-15T20:39:56+00:00"
         },
         {
             "name": "spatie/db-dumper",
